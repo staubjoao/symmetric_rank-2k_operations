@@ -26,7 +26,7 @@
 #define NJ 128
 #endif
 
-#ifdef STANDARD_DATASET /* Default if unspecified. */
+#ifdef STANDARD_DATASET
 #define NI 1024 * 3 + 128
 #define NJ 1024 * 3 + 128
 #endif

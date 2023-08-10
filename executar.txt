@@ -1,1 +1,1 @@
-gcc -O0 -I utilities -I linear-algebra/kernels/syr2k utilities/polybench.c linear-algebra/kernels/syr2k/syr2k.c -DPOLYBENCH_DUMP_ARRAYS -DMINI_DATASET -o syr2k
+gcc -O0 -I utilities -I linear-algebra/kernels/syr2k utilities/polybench.c linear-algebra/kernels/syr2k/syr2k.c -DPOLYBENCH_DUMP_ARRAYS -o syr2k
