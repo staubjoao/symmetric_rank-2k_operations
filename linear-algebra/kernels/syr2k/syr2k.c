@@ -6,17 +6,42 @@
 
 #include <polybench.h>
 
-#include "syr2k.h"
-#include <stdlib.h>
-
 int tamanho_matriz;
 
-static void init_array(int ni, int nj,
-                       double *alpha,
-                       double *beta,
-                       double POLYBENCH_2D(C, tamanho_matriz, tamanho_matriz, ni, ni),
-                       double POLYBENCH_2D(A, tamanho_matriz, tamanho_matriz, ni, nj),
-                       double POLYBENCH_2D(B, tamanho_matriz, tamanho_matriz, ni, nj))
+double **A, **B, **C;
+
+void alocarMatrizes(int ni, int nj)
+{
+  A = (double **)malloc(ni * sizeof(double *));
+  for (int i = 0; i < nj; i++)
+    A[i] = (double *)malloc(ni * sizeof(double));
+
+  B = (double **)malloc(ni * sizeof(double *));
+  for (int i = 0; i < nj; i++)
+    B[i] = (double *)malloc(ni * sizeof(double));
+
+  C = (double **)malloc(ni * sizeof(double *));
+  for (int i = 0; i < ni; i++)
+    C[i] = (double *)malloc(ni * sizeof(double));
+}
+
+void liberarMatrizes(int ni)
+{
+  for (int i = 0; i < ni; i++)
+  {
+    free(A[i]);
+    free(B[i]);
+    free(C[i]);
+  }
+
+  free(A);
+  free(B);
+  free(C);
+}
+
+void init_array(int ni, int nj,
+                double *alpha,
+                double *beta)
 {
   int i, j;
 
@@ -33,27 +58,23 @@ static void init_array(int ni, int nj,
       C[i][j] = ((double)i * j) / ni;
 }
 
-static void print_array(int ni,
-                        double POLYBENCH_2D(C, tamanho_matriz, tamanho_matriz, ni, ni))
+void print_array(int ni)
 {
   int i, j;
 
   for (i = 0; i < ni; i++)
     for (j = 0; j < ni; j++)
     {
-      fprintf(stderr, DATA_PRINTF_MODIFIER, C[i][j]);
+      fprintf(stderr, "%0.2lf ", C[i][j]);
       if ((i * ni + j) % 20 == 0)
         fprintf(stderr, "\n");
     }
   fprintf(stderr, "\n");
 }
 
-static void kernel_syr2k(int ni, int nj,
-                         double alpha,
-                         double beta,
-                         double POLYBENCH_2D(C, tamanho_matriz, tamanho_matriz, ni, ni),
-                         double POLYBENCH_2D(A, tamanho_matriz, tamanho_matriz, ni, nj),
-                         double POLYBENCH_2D(B, tamanho_matriz, tamanho_matriz, ni, nj))
+void kernel_syr2k(int ni, int nj,
+                  double alpha,
+                  double beta)
 {
   int i, j, k;
 
@@ -107,31 +128,21 @@ int main(int argc, char **argv)
 
   double alpha;
   double beta;
-  POLYBENCH_2D_ARRAY_DECL(C, double, tamanho_matriz, tamanho_matriz, ni, ni);
-  POLYBENCH_2D_ARRAY_DECL(A, double, tamanho_matriz, tamanho_matriz, ni, nj);
-  POLYBENCH_2D_ARRAY_DECL(B, double, tamanho_matriz, tamanho_matriz, ni, nj);
+  alocarMatrizes(ni, nj);
 
-  init_array(ni, nj, &alpha, &beta,
-             POLYBENCH_ARRAY(C),
-             POLYBENCH_ARRAY(A),
-             POLYBENCH_ARRAY(B));
+  init_array(ni, nj, &alpha, &beta);
 
   polybench_start_instruments;
 
   kernel_syr2k(ni, nj,
-               alpha, beta,
-               POLYBENCH_ARRAY(C),
-               POLYBENCH_ARRAY(A),
-               POLYBENCH_ARRAY(B));
+               alpha, beta);
 
   polybench_stop_instruments;
   polybench_print_instruments;
 
-  polybench_prevent_dce(print_array(ni, POLYBENCH_ARRAY(C)));
+  print_array(ni);
 
-  POLYBENCH_FREE_ARRAY(C);
-  POLYBENCH_FREE_ARRAY(A);
-  POLYBENCH_FREE_ARRAY(B);
+  liberarMatrizes(ni);
 
   return 0;
 }
