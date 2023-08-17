@@ -82,6 +82,9 @@ void *kernel_syr2k_paralelo(void *arg)
     int passolocal = passo;
     int i, j, k;
 
+    if (id_thread == n_threads - 1)
+        passolocal += resto;
+
 #pragma scop
     for (i = inicio; i < inicio + passolocal; i++)
         for (j = 0; j < ni; j++)
