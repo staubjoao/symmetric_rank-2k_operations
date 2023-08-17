@@ -3,9 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+
+#include <sys/time.h>
 #include <pthread.h>
 
-#include <polybench.h>
+// #include <polybench.h>
 
 int tamanho_matriz, ni, nj;
 int tamanho_matriz, n_threads, passo, resto;
@@ -44,6 +46,11 @@ void liberarMatrizes(int ni)
     free(A);
     free(B);
     free(C);
+}
+
+double time_diff(struct timeval *start, struct timeval *end)
+{
+    return (end->tv_sec - start->tv_sec) + 1e-6 * (end->tv_usec - start->tv_usec);
 }
 
 void init_array(int ni, int nj)
@@ -122,7 +129,7 @@ int main(int argc, char **argv)
         if (!strcmp(argv[i], "-d"))
         {
             if (strcmp(argv[i + 1], "small") == 0)
-                tamanho_matriz = 32;
+                tamanho_matriz = 3200;
             else if (strcmp(argv[i + 1], "medium") == 0)
                 tamanho_matriz = 4000;
             else if (strcmp(argv[i + 1], "large") == 0)
@@ -143,7 +150,7 @@ int main(int argc, char **argv)
 
     init_array(ni, nj);
 
-    polybench_start_instruments;
+    struct timeval tstart, tend;
 
     passo = (ni / n_threads);
     resto = (ni % n_threads);
@@ -152,6 +159,7 @@ int main(int argc, char **argv)
 
     pthread_barrier_init(&barreira, NULL, n_threads);
 
+    gettimeofday(&tstart, NULL);
     for (int t = 0; t < n_threads; ++t)
     {
         id_thread[t] = t;
@@ -159,14 +167,12 @@ int main(int argc, char **argv)
     }   
 
     for (int t = 0; t < n_threads; ++t)
-    {
         pthread_join(threads[t], NULL);
-    }
+    gettimeofday(&tend, NULL);
 
-    polybench_stop_instruments;
-    polybench_print_instruments;
+    printf("Tempo paralelo: %lf sec\n", time_diff(&tstart, &tend));
 
-    print_array(ni);
+    // print_array(ni);
 
     liberarMatrizes(ni);
 

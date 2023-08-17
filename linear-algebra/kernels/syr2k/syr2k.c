@@ -3,8 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <sys/time.h>
 
-#include <polybench.h>
+// #include <polybench.h>
 
 int tamanho_matriz;
 
@@ -37,6 +38,11 @@ void liberarMatrizes(int ni)
   free(A);
   free(B);
   free(C);
+}
+
+double time_diff(struct timeval *start, struct timeval *end)
+{
+  return (end->tv_sec - start->tv_sec) + 1e-6 * (end->tv_usec - start->tv_usec);
 }
 
 void init_array(int ni, int nj,
@@ -114,7 +120,7 @@ int main(int argc, char **argv)
     if (strcmp(argv[i], "-d") == 0)
     {
       if (strcmp(argv[i + 1], "small") == 0)
-        tamanho_matriz = 32;
+        tamanho_matriz = 35;
       else if (strcmp(argv[i + 1], "medium") == 0)
         tamanho_matriz = 4000;
       else if (strcmp(argv[i + 1], "large") == 0)
@@ -132,15 +138,21 @@ int main(int argc, char **argv)
 
   init_array(ni, nj, &alpha, &beta);
 
-  polybench_start_instruments;
+  // polybench_start_instruments;
 
+  struct timeval tstart, tend;
+
+  gettimeofday(&tstart, NULL);
   kernel_syr2k(ni, nj,
                alpha, beta);
+  gettimeofday(&tend, NULL);
 
-  polybench_stop_instruments;
-  polybench_print_instruments;
+  printf("Tempo sequencial: %lf sec\n", time_diff(&tstart, &tend));
 
-  print_array(ni);
+  // polybench_stop_instruments;
+  // polybench_print_instruments;
+
+  // print_array(ni);
 
   liberarMatrizes(ni);
 

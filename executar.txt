@@ -1,3 +1,3 @@
-sequencial: gcc -O0 -I utilities utilities/polybench.c linear-algebra/kernels/syr2k/syr2k.c -DPOLYBENCH_DUMP_ARRAYS -o syr2k
+sequencial: gcc -O0 linear-algebra/kernels/syr2k/syr2k.c -o syr2k
 
-paralelo: gcc -O0 -I utilities utilities/polybench.c syr2k_paralelo.c -DPOLYBENCH_DUMP_ARRAYS -o syr2k_paralelo
+paralelo: gcc -O0 syr2k_paralelo.c -o syr2k_paralelo
