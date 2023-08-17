@@ -156,7 +156,7 @@ int main(int argc, char **argv)
     {
         id_thread[t] = t;
         pthread_create(&threads[t], NULL, kernel_syr2k_paralelo, (void *)&id_thread[t]);
-    }
+    }   
 
     for (int t = 0; t < n_threads; ++t)
     {
