@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 {
     if (argc != 5)
     {
-        printf("Falta de parametros, use -h para verificar os comandos %d\n", argc);
+        printf("Falta de parametros, use -h para verificar os comandos.\n");
         if (argc == 2 && strcmp(argv[1], "-h") == 0)
             instrucoes();
         return 1;

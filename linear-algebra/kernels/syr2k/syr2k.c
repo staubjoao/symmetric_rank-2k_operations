@@ -102,14 +102,13 @@ void instrucoes()
 {
   printf("Use: \n");
   printf("-d TAMANHO (small, medium ou large)\n");
-  // printf("-t NUM_THREADS\n");
 }
 
 int main(int argc, char **argv)
 {
   if (argc != 3)
   {
-    printf("Falta de parametros, use -h para verificar os comandos %d\n", argc);
+    printf("Falta de parametros, use -h para verificar os comandos.\n");
     if (argc == 2 && strcmp(argv[1], "-h") == 0)
       instrucoes();
     return 1;
