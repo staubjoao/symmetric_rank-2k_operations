@@ -3,7 +3,7 @@ import os
 
 
 sizes = ["small", "medium", "large"]
-cores = [2, 4, 8, 16]
+cores = [2, 4, 8, 12]
 
 
 def main():
