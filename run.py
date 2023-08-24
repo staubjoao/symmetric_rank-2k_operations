@@ -22,6 +22,4 @@ def main():
             cmd = cmd + f" >> {nome}/log_{size}_{core}.txt"
             print(f"Running: '{cmd}' and saving at 'log_{size}_{core}.txt'")
             subprocess.call(cmd, shell=True)
-
-
 main()
