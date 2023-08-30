@@ -129,14 +129,11 @@ int main(int argc, char **argv)
         if (!strcmp(argv[i], "-d"))
         {
             if (strcmp(argv[i + 1], "small") == 0)
-                tamanho_matriz = 1600;
-                // tamanho_matriz = 3200;
-            else if (strcmp(argv[i + 1], "medium") == 0)
-                tamanho_matriz = 2400;
-                // tamanho_matriz = 4000;
-            else if (strcmp(argv[i + 1], "large") == 0)
                 tamanho_matriz = 3200;
-                // tamanho_matriz = 4800;
+            else if (strcmp(argv[i + 1], "medium") == 0)
+                tamanho_matriz = 4000;
+            else if (strcmp(argv[i + 1], "large") == 0)
+                tamanho_matriz = 4800;
             i++;
         }
         if (strcmp(argv[i], "-t") == 0)
