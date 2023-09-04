@@ -1,3 +1,9 @@
 sequencial: gcc -O0 linear-algebra/kernels/syr2k/syr2k.c -o syr2k
 
 paralelo: gcc -O0 syr2k_paralelo.c -o syr2k_paralelo
+
+MPI: 
+mpic++ teste2.c -o teste2.exe                                                                                                           ✔ 
+
+
+mpiexec -quiet -n 4 teste2.exe -d smal
