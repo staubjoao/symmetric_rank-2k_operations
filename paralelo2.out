@@ -1,6 +1,40 @@
-0.00 
-0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 184960.70 369921.40 554882.10 739842.80 924803.50 1109764.20 1294724.90 1479685.60 1664646.30 0.00 
-369921.40 739842.80 1109764.20 1479685.60 1849607.00 2219528.40 2589449.80 2959371.20 3329292.60 0.00 554882.10 1109764.20 1664646.30 2219528.40 2774410.50 3329292.60 3884174.70 2.40 2.70 0.00 
-739842.80 1479685.60 2219528.40 2959371.20 3699214.00 4439056.80 5178899.60 5918742.40 6658585.20 0.00 924803.50 1849607.00 2774410.50 3699214.00 4624017.50 5548821.00 6473624.50 4.00 4.50 0.00 
-1109764.20 2219528.40 3329292.60 4439056.80 5548821.00 6658585.20 7768349.40 8878113.60 9987877.80 0.00 1294724.90 2589449.80 3884174.70 5178899.60 6473624.50 7768349.40 9063074.30 10357799.20 11652524.10 0.00 
-1479685.60 2959371.20 4439056.80 5918742.40 7398428.00 8878113.60 10357799.20 11837484.80 13317170.40 0.00 1664646.30 3329292.60 4993938.90 3.60 4.50 5.40 6.30 7.20 8.10 
+[joao-aspirea51454:05372] *** Process received signal ***
+[joao-aspirea51454:05372] Signal: Segmentation fault (11)
+[joao-aspirea51454:05372] Signal code: Address not mapped (1)
+[joao-aspirea51454:05372] Failing at address: (nil)
+[joao-aspirea51454:05374] *** Process received signal ***
+[joao-aspirea51454:05374] Signal: Segmentation fault (11)
+[joao-aspirea51454:05374] Signal code: Address not mapped (1)
+[joao-aspirea51454:05374] Failing at address: (nil)
+[joao-aspirea51454:05375] *** Process received signal ***
+[joao-aspirea51454:05375] Signal: Segmentation fault (11)
+[joao-aspirea51454:05375] Signal code: Address not mapped (1)
+[joao-aspirea51454:05375] Failing at address: (nil)
+[joao-aspirea51454:05373] *** Process received signal ***
+[joao-aspirea51454:05373] Signal: Segmentation fault (11)
+[joao-aspirea51454:05373] Signal code: Address not mapped (1)
+[joao-aspirea51454:05373] Failing at address: (nil)
+[joao-aspirea51454:05374] [ 0] [joao-aspirea51454:05373] [ 0] [joao-aspirea51454:05375] [ 0] /usr/lib/libc.so.6(+0x3e710)[0x7fcfdda3e710]
+[joao-aspirea51454:05372] [ 0] /usr/lib/libc.so.6(+0x3e710)[0x7fbcecc3e710]
+[joao-aspirea51454:05372] [ 1] syr2k_paralelo_mpi.exe(+0x7d31)[0x559e31882d31]
+[joao-aspirea51454:05372] [ 2] /usr/lib/libc.so.6(+0x3e710)[0x7f491c43e710]
+[joao-aspirea51454:05373] [ 1] syr2k_paralelo_mpi.exe(+0x7d31)[0x557bd3185d31]
+[joao-aspirea51454:05375] [ 1] syr2k_paralelo_mpi.exe(+0x7d31)[0x55988682dd31]
+[joao-aspirea51454:05375] [ 2] /usr/lib/libc.so.6(+0x3e710)[0x7f003de3e710]
+[joao-aspirea51454:05374] [ 1] syr2k_paralelo_mpi.exe(+0x7d31)[0x5595aeb8ed31]
+[joao-aspirea51454:05374] [ 2] [joao-aspirea51454:05373] [ 2] /usr/lib/libc.so.6(+0x27cd0)[0x7f491c427cd0]
+[joao-aspirea51454:05373] [ 3] /usr/lib/libc.so.6(__libc_start_main+0x8a)[0x7f491c427d8a]
+[joao-aspirea51454:05373] [ 4] syr2k_paralelo_mpi.exe(+0x7af5)[0x557bd3185af5]
+[joao-aspirea51454:05373] *** End of error message ***
+/usr/lib/libc.so.6(+0x27cd0)[0x7fcfdda27cd0]
+[joao-aspirea51454:05375] [ 3] /usr/lib/libc.so.6(__libc_start_main+0x8a)[0x7fcfdda27d8a]
+[joao-aspirea51454:05375] [ 4] syr2k_paralelo_mpi.exe(+0x7af5)[0x55988682daf5]
+[joao-aspirea51454:05375] *** End of error message ***
+/usr/lib/libc.so.6(+0x27cd0)[0x7f003de27cd0]
+[joao-aspirea51454:05374] [ 3] /usr/lib/libc.so.6(__libc_start_main+0x8a)[0x7f003de27d8a]
+[joao-aspirea51454:05374] [ 4] syr2k_paralelo_mpi.exe(+0x7af5)[0x5595aeb8eaf5]
+[joao-aspirea51454:05374] *** End of error message ***
+/usr/lib/libc.so.6(+0x27cd0)[0x7fbcecc27cd0]
+[joao-aspirea51454:05372] [ 3] /usr/lib/libc.so.6(__libc_start_main+0x8a)[0x7fbcecc27d8a]
+[joao-aspirea51454:05372] [ 4] syr2k_paralelo_mpi.exe(+0x7af5)[0x559e31882af5]
+[joao-aspirea51454:05372] *** End of error message ***
