@@ -119,7 +119,7 @@ int main(int argc, char **argv)
     if (strcmp(argv[i], "-d") == 0)
     {
       if (strcmp(argv[i + 1], "small") == 0)
-        tamanho_matriz = 3200;
+        tamanho_matriz = 10;
       else if (strcmp(argv[i + 1], "medium") == 0)
         tamanho_matriz = 4000;
       else if (strcmp(argv[i + 1], "large") == 0)
@@ -151,7 +151,7 @@ int main(int argc, char **argv)
   // polybench_stop_instruments;
   // polybench_print_instruments;
 
-  // print_array(ni);
+  print_array(ni);
 
   liberarMatrizes(ni);
 
