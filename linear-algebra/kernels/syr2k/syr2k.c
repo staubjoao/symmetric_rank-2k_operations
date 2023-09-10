@@ -68,14 +68,34 @@ void print_array(int ni)
 {
   int i, j;
 
+  // for (i = 0; i < ni; i++)
+  //   for (j = 0; j < ni; j++)
+  //   {
+  //     fprintf(stderr, "%0.2lf ", C[i][j]);
+  //     if ((i * ni + j) % 20 == 0)
+  //       fprintf(stderr, "\n");
+  //   }
+  // fprintf(stderr, "\n");
+
   for (i = 0; i < ni; i++)
+  {
     for (j = 0; j < ni; j++)
-    {
       fprintf(stderr, "%0.2lf ", C[i][j]);
-      if ((i * ni + j) % 20 == 0)
-        fprintf(stderr, "\n");
-    }
-  fprintf(stderr, "\n");
+    fprintf(stderr, "\n");
+  }
+}
+
+void print_matriz(char title[], double **matriz, int n)
+{
+  printf("\nThe matrix %s\n", title);
+  int i, j;
+  for (i = 0; i < n; i++)
+  {
+    for (j = 0; j < n; j++)
+      printf("%0.2lf ", matriz[i][j]);
+    printf("\n");
+  }
+  printf("\n");
 }
 
 void kernel_syr2k(int ni, int nj,
@@ -119,7 +139,7 @@ int main(int argc, char **argv)
     if (strcmp(argv[i], "-d") == 0)
     {
       if (strcmp(argv[i + 1], "small") == 0)
-        tamanho_matriz = 10;
+        tamanho_matriz = 32;
       else if (strcmp(argv[i + 1], "medium") == 0)
         tamanho_matriz = 4000;
       else if (strcmp(argv[i + 1], "large") == 0)
@@ -136,6 +156,10 @@ int main(int argc, char **argv)
   alocarMatrizes(ni, nj);
 
   init_array(ni, nj, &alpha, &beta);
+
+  // print_matriz("A", A, ni);
+  // print_matriz("B", B, ni);
+  // print_matriz("C", C, ni);
 
   // polybench_start_instruments;
 

@@ -2,116 +2,246 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-#define N 10 // Tamanho das matrizes A, B e C
-double alpha = 32412;
-double beta = 2123;
+void verificar_erro(int teste_local, char fname[], char mensagem[], MPI_Comm comm);
+void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n, int n_local, MPI_Comm comm);
+void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
+void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
+void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, MPI_Comm comm);
+void kernel_syr2k(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 
-void allocateMatrix(double ***matrix, int rows, int cols)
+const double alpha = 32412;
+const double beta = 2123;
+
+int main(void)
 {
-    *matrix = (double **)malloc(rows * sizeof(double *));
-    for (int i = 0; i < rows; i++)
+    double *A_local;
+    double *B_local;
+    double *C_local;
+    int n, n_local;
+    int rank, size;
+    MPI_Comm comm;
+
+    MPI_Init(NULL, NULL);
+    comm = MPI_COMM_WORLD;
+    MPI_Comm_size(comm, &size);
+    MPI_Comm_rank(comm, &rank);
+
+    n = 32;
+
+    n_local = n / size;
+
+    alocar_matrizes(&A_local, &B_local, &C_local, n, n_local, comm);
+    inicia_matrizes(A_local, B_local, C_local, n, n_local, rank, comm);
+
+    kernel_syr2k(A_local, B_local, C_local, n, n_local, rank, comm);
+
+    imprimir_matriz_resultante(C_local, n, n_local, rank, comm);
+
+    free(A_local);
+    free(B_local);
+    free(C_local);
+    MPI_Finalize();
+    return 0;
+}
+
+void verificar_erro(
+    int teste_local /* in */,
+    char fname[] /* in */,
+    char mensagem[] /* in */,
+    MPI_Comm comm /* in */)
+{
+    int ok;
+
+    MPI_Allreduce(&teste_local, &ok, 1, MPI_INT, MPI_MIN, comm);
+    if (ok == 0)
     {
-        (*matrix)[i] = (double *)malloc(cols * sizeof(double));
+        int rank;
+        MPI_Comm_rank(comm, &rank);
+        if (rank == 0)
+        {
+            fprintf(stderr, "Processo %d > em %s, %s\n", rank, fname,
+                    mensagem);
+            fflush(stderr);
+        }
+        MPI_Finalize();
+        exit(-1);
     }
 }
 
-void syr2k(double **A, double **B, double **C, int inicio, int final)
+void alocar_matrizes(
+    double **A_local /* saida */,
+    double **B_local /* saida */,
+    double **C_local /* saida */,
+    int n /* entrada  */,
+    int n_local /* entrada  */,
+    MPI_Comm comm /* entrada  */)
 {
-    int i, j, k;
-    for (i = inicio; i < final; i++)
-        for (j = 0; j < N; j++)
-            C[i][j] *= beta;
-    MPI_Barrier(MPI_COMM_WORLD);
-    for (i = inicio; i < final; i++)
-        for (j = 0; j < N; j++)
-            for (k = 0; k < N; k++)
-            {
-                C[i][j] += alpha * A[i][k] * B[j][k];
-                C[i][j] += alpha * B[i][k] * A[j][k];
-            }
+
+    int teste_local = 1;
+
+    *A_local = malloc(n_local * n * sizeof(double));
+    *B_local = malloc(n_local * n * sizeof(double));
+    *C_local = malloc(n_local * n * sizeof(double));
+
+    if (*A_local == NULL || B_local == NULL ||
+        C_local == NULL)
+        teste_local = 0;
+    verificar_erro(teste_local, "alocar_matrizes", "Não foi possivel alocar as matrizes", comm);
 }
 
-int main(int argc, char **argv)
+void imprimir_matriz_debug(
+    char titulo[] /* in */,
+    double matriz_local[] /* in */,
+    int n /* in */,
+    int n_local /* in */,
+    int rank /* in */,
+    MPI_Comm comm /* in */)
 {
-    MPI_Init(&argc, &argv);
+    double *matriz = NULL;
+    int i, j, teste_local = 1;
 
-    int rank, num_procs;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
-
-    double **A = NULL;
-    double **B = NULL;
-    double **C = NULL;
-
-    // Cada processo aloca sua parte das matrizes
-    allocateMatrix(&A, N, N);
-    allocateMatrix(&B, N, N);
-    allocateMatrix(&C, N, N);
-
-    // Inicialize as matrizes A e B com dados apropriados para cada processo
-    // ...
-    int i, j;
-    for (i = 0; i < N; i++)
-        for (j = 0; j < N; j++)
-        {
-            A[i][j] = ((double)i * j) / N;
-            B[i][j] = ((double)i * j) / N;
-        }
-    for (i = 0; i < N; i++)
-        for (j = 0; j < N; j++)
-            C[i][j] = ((double)i * j) / N;
-
-    // Calcula a parte do SYR2K para cada processo
-    int passo = N / num_procs;
-
-    int inicio = rank * passo;
-    int final = (rank == num_procs - 1) ? N : (rank + 1) * (N / num_procs);
-    // printf("processo %d\t%d - %d\n", rank, inicio, final);
-    syr2k(A, B, C, inicio, final);
-
-    // Processo 0 recebe e combina as partes de C
     if (rank == 0)
     {
-        for (int src = 1; src < num_procs; src++)
+        matriz = malloc(n * n * sizeof(double));
+        if (matriz == NULL)
+            teste_local = 0;
+        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
+        MPI_Gather(matriz_local, n_local * n, MPI_DOUBLE,
+                   matriz, n_local * n, MPI_DOUBLE, 0, comm);
+        printf("\nThe matrix %s\n", titulo);
+        for (i = 0; i < n; i++)
         {
-            inicio = src * passo;
-            final = (src == num_procs - 1) ? N : (src + 1) * passo;
-            printf("%d: %d - %d\n", src, inicio, final);
-            MPI_Recv(&(C[inicio][0]), (final - inicio) * N, MPI_DOUBLE, src, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            for (j = 0; j < n; j++)
+                printf("%0.2lf ", matriz[i * n + j]);
+            printf("\n");
         }
+        printf("\n");
+        free(matriz);
     }
     else
     {
-        // Outros processos enviam suas partes de C para o processo 0
-        MPI_Send(&(C[inicio][0]), (final - inicio) * N, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
+        MPI_Gather(matriz_local, n_local * n, MPI_DOUBLE,
+                   matriz, n_local * n, MPI_DOUBLE, 0, comm);
     }
+}
 
-    // Processo 0 imprime a matriz resultante C
+void inicia_matrizes(
+    double A_local[] /* saida */,
+    double B_local[] /* saida */,
+    double C_local[] /* saida */,
+    int n /* entrada  */,
+    int n_local /* entrada  */,
+    int rank /* entrada  */,
+    MPI_Comm comm /* entrada  */)
+{
+    double *A = NULL;
+    double *B = NULL;
+    double *C = NULL;
+    int teste_local = 1;
+    int i, j;
+
     if (rank == 0)
     {
-        int i, j;
-
-        for (i = 0; i < N; i++)
-            for (j = 0; j < N; j++)
+        A = malloc(n * n * sizeof(double));
+        B = malloc(n * n * sizeof(double));
+        C = malloc(n * n * sizeof(double));
+        if (A == NULL)
+            teste_local = 0;
+        verificar_erro(teste_local, "inicia_matrizes", "Não foi possivel alocar as matrizes localmente", comm);
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
             {
-                fprintf(stderr, "%0.2lf ", C[i][j]);
-                if ((i * N + j) % 20 == 0)
-                    fprintf(stderr, "\n");
+                A[i * n + j] = ((double)i * j) / n;
+                B[i * n + j] = ((double)i * j) / n;
+                C[i * n + j] = ((double)i * j) / n;
             }
-        fprintf(stderr, "\n");
+        MPI_Scatter(A, n_local * n, MPI_DOUBLE, A_local, n_local * n, MPI_DOUBLE, 0, comm);
+        MPI_Scatter(B, n_local * n, MPI_DOUBLE, B_local, n_local * n, MPI_DOUBLE, 0, comm);
+        MPI_Scatter(C, n_local * n, MPI_DOUBLE, C_local, n_local * n, MPI_DOUBLE, 0, comm);
+        free(A);
+        free(B);
+        free(C);
     }
-
-    // Libera a memória alocada
-    for (int i = 0; i < N; i++)
+    else
     {
-        free(A[i]);
-        free(B[i]);
-        free(C[i]);
+        verificar_erro(teste_local, "inicia_matrizes", "Não foi possivel alocar as matrizes localmente", comm);
+        MPI_Scatter(A, n_local * n, MPI_DOUBLE, A_local, n_local * n, MPI_DOUBLE, 0, comm);
+        MPI_Scatter(B, n_local * n, MPI_DOUBLE, B_local, n_local * n, MPI_DOUBLE, 0, comm);
+        MPI_Scatter(C, n_local * n, MPI_DOUBLE, C_local, n_local * n, MPI_DOUBLE, 0, comm);
     }
+}
+
+void imprimir_matriz_resultante(
+    double C_local[] /* in */,
+    int n /* in */,
+    int n_local /* in */,
+    int rank /* in */,
+    MPI_Comm comm /* in */)
+{
+    double *C = NULL;
+    int i, j, teste_local = 1;
+
+    if (rank == 0)
+    {
+        C = malloc(n * n * sizeof(double));
+        if (C == NULL)
+            teste_local = 0;
+        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
+        MPI_Gather(C_local, n_local * n, MPI_DOUBLE,
+                   C, n_local * n, MPI_DOUBLE, 0, comm);
+
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < n; j++)
+                fprintf(stderr, "%0.2lf ", C[i * n + j]);
+            fprintf(stderr, "\n");
+        }
+        free(C);
+    }
+    else
+    {
+        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
+        MPI_Gather(C_local, n_local * n, MPI_DOUBLE,
+                   C, n_local * n, MPI_DOUBLE, 0, comm);
+    }
+}
+
+void kernel_syr2k(
+    double A_local[] /* entrada  */,
+    double B_local[] /* entrada  */,
+    double C_local[] /* in and saida  */,
+    int n /* entrada  */,
+    int n_local /* entrada  */,
+    int rank /* in */,
+    MPI_Comm comm /* entrada  */)
+{
+    double *A, *B;
+    int i, j, k;
+    int teste_local = 1;
+
+    A = malloc(n * n * sizeof(double));
+    B = malloc(n * n * sizeof(double));
+    if (A == NULL || B == NULL)
+        teste_local = 0;
+    verificar_erro(teste_local, "kernel_syr2k", "Não foi possivel alocar as matrizes localmente", comm);
+
+    MPI_Allgather(A_local, n_local * n, MPI_DOUBLE, A, n_local * n, MPI_DOUBLE, comm);
+    MPI_Allgather(B_local, n_local * n, MPI_DOUBLE, B, n_local * n, MPI_DOUBLE, comm);
+
+    for (i = 0; i < n_local; i++)
+        for (j = 0; j < n; j++)
+            C_local[i * n + j] *= beta;
+    MPI_Barrier(comm);
+
+    for (i = 0; i < n_local; i++)
+        for (j = 0; j < n; j++)
+            for (k = 0; k < n; k++)
+            {
+                C_local[i * n + j] += alpha * A_local[i * n + k] * B[j * n + k];
+                C_local[i * n + j] += alpha * B_local[i * n + k] * A[j * n + k];
+            }
+
     free(A);
     free(B);
-    free(C);
-
-    MPI_Finalize();
-    return 0;
 }

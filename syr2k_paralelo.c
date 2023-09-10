@@ -72,14 +72,22 @@ void print_array(int ni)
 {
     int i, j;
 
+    // for (i = 0; i < ni; i++)
+    //     for (j = 0; j < ni; j++)
+    //     {
+    //         fprintf(stderr, "%0.2lf ", C[i][j]);
+    //         if ((i * ni + j) % 20 == 0)
+    //             fprintf(stderr, "\n");
+    //     }
+    // fprintf(stderr, "\n");
+
     for (i = 0; i < ni; i++)
+    {
+        fprintf(stderr, "%d ", i);
         for (j = 0; j < ni; j++)
-        {
             fprintf(stderr, "%0.2lf ", C[i][j]);
-            if ((i * ni + j) % 20 == 0)
-                fprintf(stderr, "\n");
-        }
-    fprintf(stderr, "\n");
+        fprintf(stderr, "\n");
+    }
 }
 
 void *kernel_syr2k_paralelo(void *arg)
@@ -130,7 +138,7 @@ int main(int argc, char **argv)
         {
             if (strcmp(argv[i + 1], "small") == 0)
                 // tamanho_matriz = 1600;
-                tamanho_matriz = 3200;
+                tamanho_matriz = 8;
             else if (strcmp(argv[i + 1], "medium") == 0)
                 // tamanho_matriz = 2400;
                 tamanho_matriz = 4000;
@@ -175,7 +183,7 @@ int main(int argc, char **argv)
 
     printf("Tempo paralelo: %lf sec\n", time_diff(&tstart, &tend));
 
-    // print_array(ni);
+    print_array(ni);
 
     liberarMatrizes(ni);
 
