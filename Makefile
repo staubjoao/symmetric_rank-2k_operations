@@ -1,6 +1,7 @@
 CC = gcc
-MPI = mpic++
+MPI = mpicc
 CFLAGS = -O0 -w -g
+MPIFLAGS = -g -Wall
 
 all: syr2k syr2k_paralelo syr2k_paralelo_mpi 
 
@@ -11,7 +12,7 @@ syr2k_paralelo: syr2k_paralelo.c
 	$(CC) $(CFLAGS) -o syr2k_paralelo syr2k_paralelo.c
 
 syr2k_paralelo_mpi: syr2k_paralelo_mpi.c
-	$(MPI) -o syr2k_paralelo_mpi.exe syr2k_paralelo_mpi.c
+	$(MPI) $(MPIFLAGS) -o syr2k_paralelo_mpi syr2k_paralelo_mpi.c
 
 clean:
-	rm -f syr2k syr2k_paralelo
+	rm -f syr2k syr2k_paralelo syr2k_paralelo_mpi
