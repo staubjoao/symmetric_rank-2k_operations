@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <mpi.h>
 
 void verificar_erro(int teste_local, char fname[], char mensagem[], MPI_Comm comm);
@@ -12,13 +13,13 @@ void kernel_syr2k(double A_local[], double B_local[], double C_local[], int n, i
 const double alpha = 32412;
 const double beta = 2123;
 
-int main(void)
+int main(int argc, char **argv)
 {
     double *A_local;
     double *B_local;
     double *C_local;
     int n, n_local;
-    int rank, size;
+    int rank, size, root = 0;
     MPI_Comm comm;
 
     MPI_Init(NULL, NULL);
@@ -26,7 +27,27 @@ int main(void)
     MPI_Comm_size(comm, &size);
     MPI_Comm_rank(comm, &rank);
 
-    n = 32;
+    if (rank == root)
+    {
+        for (int i = 0; i < argc; i++)
+        {
+            if (!strcmp(argv[i], "-d"))
+            {
+                if (strcmp(argv[i + 1], "small") == 0)
+                    // n = 1600;
+                    n = 8;
+                else if (strcmp(argv[i + 1], "medium") == 0)
+                    // n = 2400;
+                    n = 4000;
+                else if (strcmp(argv[i + 1], "large") == 0)
+                    // n = 3200;
+                    n = 4800;
+                i++;
+            }
+        }
+    }
+
+    MPI_Bcast(&n, 1, MPI_INT, root, MPI_COMM_WORLD);
 
     n_local = n / size;
 
@@ -45,10 +66,10 @@ int main(void)
 }
 
 void verificar_erro(
-    int teste_local /* in */,
-    char fname[] /* in */,
-    char mensagem[] /* in */,
-    MPI_Comm comm /* in */)
+    int teste_local /* entrada */,
+    char fname[] /* entrada */,
+    char mensagem[] /* entrada */,
+    MPI_Comm comm /* entrada */)
 {
     int ok;
 
@@ -90,12 +111,12 @@ void alocar_matrizes(
 }
 
 void imprimir_matriz_debug(
-    char titulo[] /* in */,
-    double matriz_local[] /* in */,
-    int n /* in */,
-    int n_local /* in */,
-    int rank /* in */,
-    MPI_Comm comm /* in */)
+    char titulo[] /* entrada */,
+    double matriz_local[] /* entrada */,
+    int n /* entrada */,
+    int n_local /* entrada */,
+    int rank /* entrada */,
+    MPI_Comm comm /* entrada */)
 {
     double *matriz = NULL;
     int i, j, teste_local = 1;
@@ -173,11 +194,11 @@ void inicia_matrizes(
 }
 
 void imprimir_matriz_resultante(
-    double C_local[] /* in */,
-    int n /* in */,
-    int n_local /* in */,
-    int rank /* in */,
-    MPI_Comm comm /* in */)
+    double C_local[] /* entrada */,
+    int n /* entrada */,
+    int n_local /* entrada */,
+    int rank /* entrada */,
+    MPI_Comm comm /* entrada */)
 {
     double *C = NULL;
     int i, j, teste_local = 1;
@@ -188,8 +209,7 @@ void imprimir_matriz_resultante(
         if (C == NULL)
             teste_local = 0;
         verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
-        MPI_Gather(C_local, n_local * n, MPI_DOUBLE,
-                   C, n_local * n, MPI_DOUBLE, 0, comm);
+        MPI_Gather(C_local, n_local * n, MPI_DOUBLE, C, n_local * n, MPI_DOUBLE, 0, comm);
 
         for (i = 0; i < n; i++)
         {
@@ -202,18 +222,17 @@ void imprimir_matriz_resultante(
     else
     {
         verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
-        MPI_Gather(C_local, n_local * n, MPI_DOUBLE,
-                   C, n_local * n, MPI_DOUBLE, 0, comm);
+        MPI_Gather(C_local, n_local * n, MPI_DOUBLE, C, n_local * n, MPI_DOUBLE, 0, comm);
     }
 }
 
 void kernel_syr2k(
     double A_local[] /* entrada  */,
     double B_local[] /* entrada  */,
-    double C_local[] /* in and saida  */,
+    double C_local[] /* entrada e saida  */,
     int n /* entrada  */,
     int n_local /* entrada  */,
-    int rank /* in */,
+    int rank /* entrada */,
     MPI_Comm comm /* entrada  */)
 {
     double *A, *B;
