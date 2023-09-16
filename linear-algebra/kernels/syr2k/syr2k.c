@@ -1,11 +1,7 @@
 #include <stdio.h>
-#include <unistd.h>
-#include <string.h>
 #include <stdlib.h>
-#include <math.h>
-#include <sys/time.h>
-
-// #include <polybench.h>
+#include <string.h>
+#include <papi.h>
 
 int tamanho_matriz;
 
@@ -13,171 +9,147 @@ double **A, **B, **C;
 
 void alocarMatrizes(int ni, int nj)
 {
-  A = (double **)malloc(ni * sizeof(double *));
-  for (int i = 0; i < nj; i++)
-    A[i] = (double *)malloc(ni * sizeof(double));
+    A = (double **)malloc(ni * sizeof(double *));
+    for (int i = 0; i < nj; i++)
+        A[i] = (double *)malloc(ni * sizeof(double));
 
-  B = (double **)malloc(ni * sizeof(double *));
-  for (int i = 0; i < nj; i++)
-    B[i] = (double *)malloc(ni * sizeof(double));
+    B = (double **)malloc(ni * sizeof(double *));
+    for (int i = 0; i < nj; i++)
+        B[i] = (double *)malloc(ni * sizeof(double));
 
-  C = (double **)malloc(ni * sizeof(double *));
-  for (int i = 0; i < ni; i++)
-    C[i] = (double *)malloc(ni * sizeof(double));
+    C = (double **)malloc(ni * sizeof(double *));
+    for (int i = 0; i < ni; i++)
+        C[i] = (double *)malloc(ni * sizeof(double));
 }
 
 void liberarMatrizes(int ni)
 {
-  for (int i = 0; i < ni; i++)
-  {
-    free(A[i]);
-    free(B[i]);
-    free(C[i]);
-  }
+    for (int i = 0; i < ni; i++)
+    {
+        free(A[i]);
+        free(B[i]);
+        free(C[i]);
+    }
 
-  free(A);
-  free(B);
-  free(C);
-}
-
-double time_diff(struct timeval *start, struct timeval *end)
-{
-  return (end->tv_sec - start->tv_sec) + 1e-6 * (end->tv_usec - start->tv_usec);
+    free(A);
+    free(B);
+    free(C);
 }
 
 void init_array(int ni, int nj,
                 double *alpha,
                 double *beta)
 {
-  int i, j;
+    int i, j;
 
-  *alpha = 32412;
-  *beta = 2123;
-  for (i = 0; i < ni; i++)
-    for (j = 0; j < nj; j++)
-    {
-      A[i][j] = ((double)i * j) / ni;
-      B[i][j] = ((double)i * j) / ni;
-    }
-  for (i = 0; i < ni; i++)
-    for (j = 0; j < ni; j++)
-      C[i][j] = ((double)i * j) / ni;
-}
-
-void print_array(int ni)
-{
-  int i, j;
-
-  // for (i = 0; i < ni; i++)
-  //   for (j = 0; j < ni; j++)
-  //   {
-  //     fprintf(stderr, "%0.2lf ", C[i][j]);
-  //     if ((i * ni + j) % 20 == 0)
-  //       fprintf(stderr, "\n");
-  //   }
-  // fprintf(stderr, "\n");
-
-  for (i = 0; i < ni; i++)
-  {
-    for (j = 0; j < ni; j++)
-      fprintf(stderr, "%0.2lf ", C[i][j]);
-    fprintf(stderr, "\n");
-  }
-}
-
-void print_matriz(char title[], double **matriz, int n)
-{
-  printf("\nThe matrix %s\n", title);
-  int i, j;
-  for (i = 0; i < n; i++)
-  {
-    for (j = 0; j < n; j++)
-      printf("%0.2lf ", matriz[i][j]);
-    printf("\n");
-  }
-  printf("\n");
+    *alpha = 32412;
+    *beta = 2123;
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < nj; j++)
+        {
+            A[i][j] = ((double)i * j) / ni;
+            B[i][j] = ((double)i * j) / ni;
+        }
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < ni; j++)
+            C[i][j] = ((double)i * j) / ni;
 }
 
 void kernel_syr2k(int ni, int nj,
                   double alpha,
                   double beta)
 {
-  int i, j, k;
+    int i, j, k;
 
-#pragma scop
-  for (i = 0; i < ni; i++)
-    for (j = 0; j < ni; j++)
-      C[i][j] *= beta;
-  for (i = 0; i < ni; i++)
-    for (j = 0; j < ni; j++)
-      for (k = 0; k < nj; k++)
-      {
-        C[i][j] += alpha * A[i][k] * B[j][k];
-        C[i][j] += alpha * B[i][k] * A[j][k];
-      }
-#pragma endscop
+    // Loop de código a ser medido
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < ni; j++)
+            C[i][j] *= beta;
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < ni; j++)
+            for (k = 0; k < nj; k++)
+            {
+                C[i][j] += alpha * A[i][k] * B[j][k];
+                C[i][j] += alpha * B[i][k] * A[j][k];
+            }
 }
 
 void instrucoes()
 {
-  printf("Use: \n");
-  printf("-d TAMANHO (small, medium ou large)\n");
+    printf("Use: \n");
+    printf("-d TAMANHO (small, medium ou large)\n");
 }
 
 int main(int argc, char **argv)
 {
-  if (argc != 3)
-  {
-    printf("Falta de parametros, use -h para verificar os comandos.\n");
-    if (argc == 2 && strcmp(argv[1], "-h") == 0)
-      instrucoes();
-    return 1;
-  }
-
-  for (int i = 0; i < argc; i++)
-  {
-    if (strcmp(argv[i], "-d") == 0)
+    if (argc != 3)
     {
-      if (strcmp(argv[i + 1], "small") == 0)
-        tamanho_matriz = 32;
-      else if (strcmp(argv[i + 1], "medium") == 0)
-        tamanho_matriz = 4000;
-      else if (strcmp(argv[i + 1], "large") == 0)
-        tamanho_matriz = 4800;
-      i++;
+        printf("Falta de parametros, use -h para verificar os comandos.\n");
+        if (argc == 2 && strcmp(argv[1], "-h") == 0)
+            instrucoes();
+        return 1;
     }
-  }
 
-  int ni = tamanho_matriz;
-  int nj = tamanho_matriz;
+    for (int i = 0; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-d") == 0)
+        {
+            if (strcmp(argv[i + 1], "small") == 0)
+                tamanho_matriz = 320;
+            else if (strcmp(argv[i + 1], "medium") == 0)
+                tamanho_matriz = 400;
+            else if (strcmp(argv[i + 1], "large") == 0)
+                tamanho_matriz = 480;
+            i++;
+        }
+    }
 
-  double alpha;
-  double beta;
-  alocarMatrizes(ni, nj);
+    int ni = tamanho_matriz;
+    int nj = tamanho_matriz;
 
-  init_array(ni, nj, &alpha, &beta);
+    double alpha;
+    double beta;
+    alocarMatrizes(ni, nj);
 
-  // print_matriz("A", A, ni);
-  // print_matriz("B", B, ni);
-  // print_matriz("C", C, ni);
+    init_array(ni, nj, &alpha, &beta);
 
-  // polybench_start_instruments;
+    // Inicialize a biblioteca PAPI
+    PAPI_library_init(PAPI_VER_CURRENT);
 
-  struct timeval tstart, tend;
+    // Crie um evento para medir o número de ciclos da CPU
+    int event_set = PAPI_NULL;
 
-  gettimeofday(&tstart, NULL);
-  kernel_syr2k(ni, nj,
-               alpha, beta);
-  gettimeofday(&tend, NULL);
+    PAPI_create_eventset(&event_set);
+    PAPI_add_event(event_set, PAPI_L1_DCM);
 
-  printf("Tempo sequencial: %lf sec\n", time_diff(&tstart, &tend));
+    // Inicie a medição
+    PAPI_start(event_set);
 
-  // polybench_stop_instruments;
-  // polybench_print_instruments;
+    // Medir o tempo do kernel
+    double start_time = PAPI_get_real_nsec();
+    kernel_syr2k(ni, nj, alpha, beta);
+    double end_time = PAPI_get_real_nsec();
 
-  print_array(ni);
+    // Pare a medição
+    PAPI_stop(event_set, NULL);
 
-  liberarMatrizes(ni);
+    // Leia o valor do contador
+    long long values;
+    PAPI_read(event_set, &values);
 
-  return 0;
+    // Imprima o número de ciclos da CPU
+    double elapsed_time = (end_time - start_time) / 1e9; // Converter para segundos
+    printf("Estagnação : %lld\n", values);
+    printf("Elapsed time: %f\n", elapsed_time);
+
+    // Libere recursos da PAPI
+    PAPI_cleanup_eventset(event_set);
+    PAPI_destroy_eventset(&event_set);
+    PAPI_shutdown();
+
+    // Libere a memória das matrizes
+    liberarMatrizes(ni);
+
+    return 0;
 }
+
