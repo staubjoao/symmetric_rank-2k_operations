@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <papi.h>
+#include <sys/time.h>
 
 int tamanho_matriz;
 
@@ -34,6 +34,11 @@ void liberarMatrizes(int ni)
     free(A);
     free(B);
     free(C);
+}
+
+double time_diff(struct timeval *start, struct timeval *end)
+{
+    return (end->tv_sec - start->tv_sec) + 1e-6 * (end->tv_usec - start->tv_usec);
 }
 
 void init_array(int ni, int nj,
@@ -95,7 +100,7 @@ int main(int argc, char **argv)
         if (strcmp(argv[i], "-d") == 0)
         {
             if (strcmp(argv[i + 1], "small") == 0)
-                tamanho_matriz = 320;
+                tamanho_matriz = 3200;
             else if (strcmp(argv[i + 1], "medium") == 0)
                 tamanho_matriz = 400;
             else if (strcmp(argv[i + 1], "large") == 0)
@@ -113,43 +118,16 @@ int main(int argc, char **argv)
 
     init_array(ni, nj, &alpha, &beta);
 
-    // Inicialize a biblioteca PAPI
-    PAPI_library_init(PAPI_VER_CURRENT);
+    struct timeval tstart, tend;
 
-    // Crie um evento para medir o número de ciclos da CPU
-    int event_set = PAPI_NULL;
-
-    PAPI_create_eventset(&event_set);
-    PAPI_add_event(event_set, PAPI_L1_DCM);
-
-    // Inicie a medição
-    PAPI_start(event_set);
-
-    // Medir o tempo do kernel
-    double start_time = PAPI_get_real_nsec();
+    gettimeofday(&tstart, NULL);
     kernel_syr2k(ni, nj, alpha, beta);
-    double end_time = PAPI_get_real_nsec();
+    gettimeofday(&tend, NULL);
 
-    // Pare a medição
-    PAPI_stop(event_set, NULL);
-
-    // Leia o valor do contador
-    long long values;
-    PAPI_read(event_set, &values);
-
-    // Imprima o número de ciclos da CPU
-    double elapsed_time = (end_time - start_time) / 1e9; // Converter para segundos
-    printf("Estagnação : %lld\n", values);
-    printf("Elapsed time: %f\n", elapsed_time);
-
-    // Libere recursos da PAPI
-    PAPI_cleanup_eventset(event_set);
-    PAPI_destroy_eventset(&event_set);
-    PAPI_shutdown();
+    printf("Tempo sequencial: %lf sec\n", time_diff(&tstart, &tend));
 
     // Libere a memória das matrizes
     liberarMatrizes(ni);
 
     return 0;
 }
-
