@@ -7,7 +7,7 @@ cores = [2, 4, 8, 16]
 
 
 def main():
-    nome = "teste"
+    nome = "teste1"
     if not os.path.exists(nome+'/'):
         os.mkdir(nome)
     for size in sizes:
@@ -22,4 +22,6 @@ def main():
             cmd = cmd + f" >> {nome}/log_{size}_{core}.txt"
             print(f"Running: '{cmd}' and saving at 'log_{size}_{core}.txt'")
             subprocess.call(cmd, shell=True)
+
+
 main()

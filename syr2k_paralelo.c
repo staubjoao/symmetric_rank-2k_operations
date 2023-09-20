@@ -137,14 +137,11 @@ int main(int argc, char **argv)
         if (!strcmp(argv[i], "-d"))
         {
             if (strcmp(argv[i + 1], "small") == 0)
-                // tamanho_matriz = 1600;
-                tamanho_matriz = 8;
+                tamanho_matriz = 320;
             else if (strcmp(argv[i + 1], "medium") == 0)
-                // tamanho_matriz = 2400;
-                tamanho_matriz = 4000;
+                tamanho_matriz = 400;
             else if (strcmp(argv[i + 1], "large") == 0)
-                // tamanho_matriz = 3200;
-                tamanho_matriz = 4800;
+                tamanho_matriz = 480;
             i++;
         }
         if (strcmp(argv[i], "-t") == 0)
@@ -183,7 +180,7 @@ int main(int argc, char **argv)
 
     printf("Tempo paralelo: %lf sec\n", time_diff(&tstart, &tend));
 
-    print_array(ni);
+    // print_array(ni);
 
     liberarMatrizes(ni);
 

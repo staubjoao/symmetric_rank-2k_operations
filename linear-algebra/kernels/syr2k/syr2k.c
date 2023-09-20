@@ -100,7 +100,7 @@ int main(int argc, char **argv)
         if (strcmp(argv[i], "-d") == 0)
         {
             if (strcmp(argv[i + 1], "small") == 0)
-                tamanho_matriz = 8;
+                tamanho_matriz = 320;
             else if (strcmp(argv[i + 1], "medium") == 0)
                 tamanho_matriz = 400;
             else if (strcmp(argv[i + 1], "large") == 0)

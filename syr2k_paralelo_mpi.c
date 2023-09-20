@@ -1,3 +1,5 @@
+// sudo mpiexec -n 4 perf stat -e cache-references,cache-misses,cycles,instructions ./syr2k_paralelo_mpi --enable-32bits-pci-domain
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +9,7 @@ void verificar_erro(int teste_local, char fname[], char mensagem[], MPI_Comm com
 void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n, int n_local, MPI_Comm comm);
 void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
 void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
-void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, MPI_Comm comm);
+void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, MPI_Comm comm);
 void kernel_syr2k(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 
 const double alpha = 32412;
@@ -58,7 +60,7 @@ int main(int argc, char **argv)
     kernel_syr2k(A_local, B_local, C_local, n, n_local, rank, comm);
     double end = MPI_Wtime();
 
-    imprimir_matriz_resultante(C_local, n, n_local, rank, comm, tempo);
+    imprimir_matriz_resultante(C_local, n, n_local, rank, start, end, comm);
 
     free(A_local);
     free(B_local);
@@ -82,8 +84,7 @@ void verificar_erro(
         MPI_Comm_rank(comm, &rank);
         if (rank == 0)
         {
-            fprintf(stderr, "Processo %d > em %s, %s\n", rank, fname,
-                    mensagem);
+            fprintf(stderr, "Processo %d > em %s, %s\n", rank, fname, mensagem);
             fflush(stderr);
         }
         MPI_Finalize();
@@ -200,6 +201,8 @@ void imprimir_matriz_resultante(
     int n /* entrada */,
     int n_local /* entrada */,
     int rank /* entrada */,
+    double start,
+    double end,
     MPI_Comm comm /* entrada */)
 {
     double *C = NULL;
@@ -212,6 +215,8 @@ void imprimir_matriz_resultante(
             teste_local = 0;
         verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
         MPI_Gather(C_local, n_local * n, MPI_DOUBLE, C, n_local * n, MPI_DOUBLE, 0, comm);
+
+        fprintf(stderr, "Tempo mpi: %lf sec\n", end - start);
 
         for (i = 0; i < n; i++)
         {

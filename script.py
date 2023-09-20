@@ -8,7 +8,8 @@ def main():
     matrix_size = sys.argv[1]
     threads = int(sys.argv[2])
     values = []
-    for i in range(10):
+    qtd = 6
+    for i in range(qtd):
         if threads == 0:
             value = subprocess.check_output(
                 f"./syr2k -d {matrix_size}", shell=True)
@@ -22,7 +23,7 @@ def main():
         value = Decimal(aux[1])
         print(f"{i}: {value}")
         values.append(value)
-    media = sum(values)/10
+    media = sum(values)/qtd
     desvio = np.std(values)
     print("")
     print(f"media: {media} desvio padrão: {desvio}")
