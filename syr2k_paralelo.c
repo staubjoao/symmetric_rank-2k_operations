@@ -7,7 +7,47 @@
 #include <sys/time.h>
 #include <pthread.h>
 
-// #include <polybench.h>
+#include <argp.h>
+
+struct arguments
+{
+    char *size;
+    int num_threads;
+    int debug;
+};
+
+static struct argp_option options[] = {
+    {"size", 'd', "SIZE", 0, "Specify matrix size (small, medium, or large)"},
+    {"threads", 't', "NUM", 0, "Specify number of threads"},
+    {"debug", 'D', 0, 0, "Print debug information"},
+    {"help", 'h', 0, 0, "Print this help message"},
+    {0}};
+
+static error_t parse_opt(int key, char *arg, struct argp_state *state)
+{
+    struct arguments *arguments = state->input;
+
+    switch (key)
+    {
+    case 'd':
+        arguments->size = arg;
+        break;
+    case 't':
+        arguments->num_threads = atoi(arg);
+        break;
+    case 'D':
+        arguments->debug = 1;
+        break;
+    case 'h':
+        argp_state_help(state, stdout, ARGP_HELP_STD_HELP);
+        exit(0);
+    default:
+        return ARGP_ERR_UNKNOWN;
+    }
+    return 0;
+}
+
+static struct argp argp = {options, parse_opt, NULL, NULL};
 
 int tamanho_matriz, ni, nj;
 int tamanho_matriz, n_threads, passo, resto;
@@ -72,22 +112,14 @@ void print_array(int ni)
 {
     int i, j;
 
-    // for (i = 0; i < ni; i++)
-    //     for (j = 0; j < ni; j++)
-    //     {
-    //         fprintf(stderr, "%0.2lf ", C[i][j]);
-    //         if ((i * ni + j) % 20 == 0)
-    //             fprintf(stderr, "\n");
-    //     }
-    // fprintf(stderr, "\n");
-
     for (i = 0; i < ni; i++)
-    {
-        fprintf(stderr, "%d ", i);
         for (j = 0; j < ni; j++)
+        {
             fprintf(stderr, "%0.2lf ", C[i][j]);
-        fprintf(stderr, "\n");
-    }
+            if ((i * ni + j) % 20 == 0)
+                fprintf(stderr, "\n");
+        }
+    fprintf(stderr, "\n");
 }
 
 void *kernel_syr2k_paralelo(void *arg)
@@ -115,37 +147,33 @@ void *kernel_syr2k_paralelo(void *arg)
 #pragma endscop
 }
 
-void instrucoes()
-{
-    printf("Use: \n");
-    printf("-d TAMANHO (small, medium ou large)\n");
-    printf("-t NUM_THREADS\n");
-}
-
 int main(int argc, char **argv)
 {
-    if (argc != 5)
+    struct arguments arguments;
+    arguments.size = NULL;
+    arguments.num_threads = 0;
+    arguments.debug = 0;
+
+    argp_parse(&argp, argc, argv, 0, 0, &arguments);
+
+    if (arguments.size == NULL || arguments.num_threads == 0)
     {
-        printf("Falta de parametros, use -h para verificar os comandos.\n");
-        if (argc == 2 && strcmp(argv[1], "-h") == 0)
-            instrucoes();
-        return 1;
+        fprintf(stderr, "Os argumentos -d e -t são obrigatórios. Use -h para ver os comandos.\n");
+        exit(1);
     }
 
-    for (int i = 0; i < argc; i++)
+    if (arguments.size != NULL)
     {
-        if (!strcmp(argv[i], "-d"))
-        {
-            if (strcmp(argv[i + 1], "small") == 0)
-                tamanho_matriz = 320;
-            else if (strcmp(argv[i + 1], "medium") == 0)
-                tamanho_matriz = 400;
-            else if (strcmp(argv[i + 1], "large") == 0)
-                tamanho_matriz = 480;
-            i++;
-        }
-        if (strcmp(argv[i], "-t") == 0)
-            n_threads = atoi(argv[++i]);
+        if (strcmp(arguments.size, "small") == 0)
+            tamanho_matriz = 320;
+        else if (strcmp(arguments.size, "medium") == 0)
+            tamanho_matriz = 400;
+        else if (strcmp(arguments.size, "large") == 0)
+            tamanho_matriz = 480;
+    }
+    if (arguments.num_threads > 0)
+    {
+        n_threads = arguments.num_threads;
     }
 
     ni = tamanho_matriz;
@@ -180,7 +208,8 @@ int main(int argc, char **argv)
 
     printf("Tempo paralelo: %lf sec\n", time_diff(&tstart, &tend));
 
-    // print_array(ni);
+    if (arguments.debug)
+        print_array(ni);
 
     liberarMatrizes(ni);
 

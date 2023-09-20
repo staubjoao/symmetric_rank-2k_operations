@@ -2,6 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+#include <argp.h>
+
+struct arguments
+{
+    char *size;
+    int debug;
+};
+
+static struct argp_option options[] = {
+    {"size", 'd', "SIZE", 0, "Specify matrix size (small, medium, or large)"},
+    {"debug", 'D', 0, 0, "Print debug information"},
+    {"help", 'h', 0, 0, "Print this help message"},
+    {0}};
+
+static error_t parse_opt(int key, char *arg, struct argp_state *state)
+{
+    struct arguments *arguments = state->input;
+
+    switch (key)
+    {
+    case 'd':
+        arguments->size = arg;
+        break;
+    case 'D':
+        arguments->debug = 1;
+        break;
+    case 'h':
+        argp_state_help(state, stdout, ARGP_HELP_STD_HELP);
+        exit(0);
+    default:
+        return ARGP_ERR_UNKNOWN;
+    }
+    return 0;
+}
+
+static struct argp argp = {options, parse_opt, NULL, NULL};
 
 int tamanho_matriz;
 
@@ -79,34 +115,42 @@ void kernel_syr2k(int ni, int nj,
             }
 }
 
-void instrucoes()
+void print_array(int ni)
 {
-    printf("Use: \n");
-    printf("-d TAMANHO (small, medium ou large)\n");
+    int i, j;
+
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < ni; j++)
+        {
+            fprintf(stderr, "%0.2lf ", C[i][j]);
+            if ((i * ni + j) % 20 == 0)
+                fprintf(stderr, "\n");
+        }
+    fprintf(stderr, "\n");
 }
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    struct arguments arguments;
+    arguments.size = NULL;
+    arguments.debug = 0;
+
+    argp_parse(&argp, argc, argv, 0, 0, &arguments);
+
+    if (arguments.size == NULL)
     {
-        printf("Falta de parametros, use -h para verificar os comandos.\n");
-        if (argc == 2 && strcmp(argv[1], "-h") == 0)
-            instrucoes();
-        return 1;
+        fprintf(stderr, "O argumento -d é obrigatório. Use -h para ver os comandos.\n");
+        exit(1);
     }
 
-    for (int i = 0; i < argc; i++)
+    if (arguments.size != NULL)
     {
-        if (strcmp(argv[i], "-d") == 0)
-        {
-            if (strcmp(argv[i + 1], "small") == 0)
-                tamanho_matriz = 320;
-            else if (strcmp(argv[i + 1], "medium") == 0)
-                tamanho_matriz = 400;
-            else if (strcmp(argv[i + 1], "large") == 0)
-                tamanho_matriz = 480;
-            i++;
-        }
+        if (strcmp(arguments.size, "small") == 0)
+            tamanho_matriz = 320;
+        else if (strcmp(arguments.size, "medium") == 0)
+            tamanho_matriz = 400;
+        else if (strcmp(arguments.size, "large") == 0)
+            tamanho_matriz = 480;
     }
 
     int ni = tamanho_matriz;
@@ -124,9 +168,10 @@ int main(int argc, char **argv)
     kernel_syr2k(ni, nj, alpha, beta);
     gettimeofday(&tend, NULL);
 
-    printf("Tempo sequencial: %lf sec\n", time_diff(&tstart, &tend));
+    printf("Tempo sequencial: %lf sec %d\n", time_diff(&tstart, &tend), arguments.debug);
 
-    // Libere a memória das matrizes
+    if (arguments.debug)
+        print_array(ni);
     liberarMatrizes(ni);
 
     return 0;

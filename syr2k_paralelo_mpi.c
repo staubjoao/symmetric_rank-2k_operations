@@ -37,7 +37,7 @@ int main(int argc, char **argv)
             {
                 if (strcmp(argv[i + 1], "small") == 0)
                     // n = 1600;
-                    n = 8;
+                    n = 3200;
                 else if (strcmp(argv[i + 1], "medium") == 0)
                     // n = 2400;
                     n = 4000;
