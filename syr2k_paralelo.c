@@ -165,11 +165,11 @@ int main(int argc, char **argv)
     if (arguments.size != NULL)
     {
         if (strcmp(arguments.size, "small") == 0)
-            tamanho_matriz = 320;
+            tamanho_matriz = 3200;
         else if (strcmp(arguments.size, "medium") == 0)
-            tamanho_matriz = 400;
+            tamanho_matriz = 4000;
         else if (strcmp(arguments.size, "large") == 0)
-            tamanho_matriz = 480;
+            tamanho_matriz = 4800;
     }
     if (arguments.num_threads > 0)
     {
