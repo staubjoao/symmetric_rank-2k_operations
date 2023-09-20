@@ -54,9 +54,11 @@ int main(int argc, char **argv)
     alocar_matrizes(&A_local, &B_local, &C_local, n, n_local, comm);
     inicia_matrizes(A_local, B_local, C_local, n, n_local, rank, comm);
 
+    double start = MPI_Wtime();
     kernel_syr2k(A_local, B_local, C_local, n, n_local, rank, comm);
+    double end = MPI_Wtime();
 
-    imprimir_matriz_resultante(C_local, n, n_local, rank, comm);
+    imprimir_matriz_resultante(C_local, n, n_local, rank, comm, tempo);
 
     free(A_local);
     free(B_local);
