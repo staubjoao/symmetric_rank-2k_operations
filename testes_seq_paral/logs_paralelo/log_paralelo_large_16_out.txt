@@ -1,0 +1,120 @@
+Executando repetição 1 para large e com 16 threads:
+Tempo paralelo: 0.000439 sec
+
+ Performance counter stats for '../syr2k_paralelo -d large -t 16':
+
+              1,32 msec cpu-clock                        #    1,326 CPUs utilized             
+              1,37 msec task-clock                       #    1,374 CPUs utilized             
+                13      context-switches                 #    9,665 K/sec                     
+                 0      cpu-migrations                   #    0,000 /sec                      
+               109      page-faults                      #   81,037 K/sec                     
+           653.997      branches                         #  486,218 M/sec                     
+            14.377      branch-misses                    #    2,20% of all branches           
+            89.883      cache-references                 #   66,824 M/sec                     
+            25.874      cache-misses                     #   28,786 % of all cache refs       
+         4.751.932      cycles                           #    3,533 GHz                       
+         6.794.377      instructions                     #    1,43  insn per cycle            
+
+       0,000996410 seconds time elapsed
+
+       0,002023000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para large e com 16 threads:
+Tempo paralelo: 0.000537 sec
+
+ Performance counter stats for '../syr2k_paralelo -d large -t 16':
+
+              1,55 msec cpu-clock                        #    1,317 CPUs utilized             
+              1,57 msec task-clock                       #    1,338 CPUs utilized             
+                12      context-switches                 #    7,705 K/sec                     
+                 0      cpu-migrations                   #    0,000 /sec                      
+               108      page-faults                      #   69,342 K/sec                     
+           652.736      branches                         #  419,090 M/sec                     
+            15.733      branch-misses                    #    2,41% of all branches           
+           109.042      cache-references                 #   70,011 M/sec                     
+            29.194      cache-misses                     #   26,773 % of all cache refs       
+         5.319.530      cycles                           #    3,415 GHz                       
+         6.781.322      instructions                     #    1,27  insn per cycle            
+
+       0,001173289 seconds time elapsed
+
+       0,002544000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para large e com 16 threads:
+Tempo paralelo: 0.000590 sec
+
+ Performance counter stats for '../syr2k_paralelo -d large -t 16':
+
+              1,45 msec cpu-clock                        #    1,237 CPUs utilized             
+              1,49 msec task-clock                       #    1,273 CPUs utilized             
+                10      context-switches                 #    6,809 K/sec                     
+                 0      cpu-migrations                   #    0,000 /sec                      
+               109      page-faults                      #   74,222 K/sec                     
+           661.584      branches                         #  450,497 M/sec                     
+            17.710      branch-misses                    #    2,68% of all branches           
+           116.618      cache-references                 #   79,410 M/sec                     
+            28.255      cache-misses                     #   24,229 % of all cache refs       
+         5.288.667      cycles                           #    3,601 GHz                       
+         6.850.469      instructions                     #    1,30  insn per cycle            
+
+       0,001169813 seconds time elapsed
+
+       0,000000000 seconds user
+       0,002293000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para large e com 16 threads:
+Tempo paralelo: 0.000604 sec
+
+ Performance counter stats for '../syr2k_paralelo -d large -t 16':
+
+              1,83 msec cpu-clock                        #    1,450 CPUs utilized             
+              1,87 msec task-clock                       #    1,479 CPUs utilized             
+                11      context-switches                 #    5,953 K/sec                     
+                 0      cpu-migrations                   #    0,000 /sec                      
+               108      page-faults                      #   58,449 K/sec                     
+           665.247      branches                         #  360,029 M/sec                     
+            16.840      branch-misses                    #    2,53% of all branches           
+           122.161      cache-references                 #   66,113 M/sec                     
+            25.849      cache-misses                     #   21,160 % of all cache refs       
+         6.300.954      cycles                           #    3,410 GHz                       
+         6.850.293      instructions                     #    1,09  insn per cycle            
+
+       0,001261494 seconds time elapsed
+
+       0,000000000 seconds user
+       0,002821000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para large e com 16 threads:
+Tempo paralelo: 0.000742 sec
+
+ Performance counter stats for '../syr2k_paralelo -d large -t 16':
+
+              1,56 msec cpu-clock                        #    1,225 CPUs utilized             
+              1,59 msec task-clock                       #    1,249 CPUs utilized             
+                14      context-switches                 #    8,866 K/sec                     
+                 0      cpu-migrations                   #    0,000 /sec                      
+               108      page-faults                      #   68,394 K/sec                     
+           665.394      branches                         #  421,382 M/sec                     
+            19.204      branch-misses                    #    2,89% of all branches           
+           137.082      cache-references                 #   86,812 M/sec                     
+            26.852      cache-misses                     #   19,588 % of all cache refs       
+         5.448.745      cycles                           #    3,451 GHz                       
+         6.849.283      instructions                     #    1,26  insn per cycle            
+
+       0,001276883 seconds time elapsed
+
+       0,002495000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------

@@ -1,0 +1,120 @@
+Executando repetição 1 para small:
+Tempo: 0.000003 sec 0
+
+ Performance counter stats for '../syr2k -d small':
+
+              0,34 msec cpu-clock                        #    0,547 CPUs utilized             
+              0,34 msec task-clock                       #    0,549 CPUs utilized             
+                 0      context-switches                 #    0,000 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+                66      page-faults                      #  194,027 K/sec                     
+           230.644      branches                         #  678,047 M/sec                     
+             6.888      branch-misses                    #    2,99% of all branches           
+            24.736      cache-references                 #   72,719 M/sec                     
+            11.838      cache-misses                     #   47,857 % of all cache refs       
+         1.292.868      cycles                           #    3,801 GHz                       
+         1.313.279      instructions                     #    1,02  insn per cycle            
+
+       0,000620770 seconds time elapsed
+
+       0,000677000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para small:
+Tempo: 0.000004 sec 0
+
+ Performance counter stats for '../syr2k -d small':
+
+              0,39 msec cpu-clock                        #    0,563 CPUs utilized             
+              0,39 msec task-clock                       #    0,565 CPUs utilized             
+                 0      context-switches                 #    0,000 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+                65      page-faults                      #  166,375 K/sec                     
+           229.024      branches                         #  586,214 M/sec                     
+             6.948      branch-misses                    #    3,03% of all branches           
+            24.419      cache-references                 #   62,503 M/sec                     
+            10.676      cache-misses                     #   43,720 % of all cache refs       
+         1.226.841      cycles                           #    3,140 GHz                       
+         1.299.764      instructions                     #    1,06  insn per cycle            
+
+       0,000692927 seconds time elapsed
+
+       0,000781000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para small:
+Tempo: 0.000004 sec 0
+
+ Performance counter stats for '../syr2k -d small':
+
+              0,33 msec cpu-clock                        #    0,562 CPUs utilized             
+              0,34 msec task-clock                       #    0,564 CPUs utilized             
+                 0      context-switches                 #    0,000 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+                66      page-faults                      #  197,341 K/sec                     
+           231.115      branches                         #  691,036 M/sec                     
+             7.021      branch-misses                    #    3,04% of all branches           
+            23.917      cache-references                 #   71,512 M/sec                     
+            11.042      cache-misses                     #   46,168 % of all cache refs       
+         1.245.612      cycles                           #    3,724 GHz                       
+         1.313.423      instructions                     #    1,05  insn per cycle            
+
+       0,000593682 seconds time elapsed
+
+       0,000709000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para small:
+Tempo: 0.000004 sec 0
+
+ Performance counter stats for '../syr2k -d small':
+
+              0,32 msec cpu-clock                        #    0,486 CPUs utilized             
+              0,32 msec task-clock                       #    0,489 CPUs utilized             
+                 0      context-switches                 #    0,000 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+                65      page-faults                      #  203,216 K/sec                     
+           228.467      branches                         #  714,281 M/sec                     
+             6.891      branch-misses                    #    3,02% of all branches           
+            22.606      cache-references                 #   70,676 M/sec                     
+            11.527      cache-misses                     #   50,991 % of all cache refs       
+         1.192.806      cycles                           #    3,729 GHz                       
+         1.297.824      instructions                     #    1,09  insn per cycle            
+
+       0,000656349 seconds time elapsed
+
+       0,000621000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para small:
+Tempo: 0.000003 sec 0
+
+ Performance counter stats for '../syr2k -d small':
+
+              0,33 msec cpu-clock                        #    0,533 CPUs utilized             
+              0,33 msec task-clock                       #    0,535 CPUs utilized             
+                 0      context-switches                 #    0,000 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+                65      page-faults                      #  199,226 K/sec                     
+           229.252      branches                         #  702,661 M/sec                     
+             6.978      branch-misses                    #    3,04% of all branches           
+            24.811      cache-references                 #   76,046 M/sec                     
+             9.091      cache-misses                     #   36,641 % of all cache refs       
+         1.324.423      cycles                           #    4,059 GHz                       
+         1.302.105      instructions                     #    0,98  insn per cycle            
+
+       0,000611041 seconds time elapsed
+
+       0,000676000 seconds user
+       0,000000000 seconds sys
+
+
+----------------------------------------
