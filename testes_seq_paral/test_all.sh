@@ -1,21 +1,22 @@
 #!/bin/bash
 
 tamanhos=("small" "medium" "large")
-num_threads=("2" "4" "8" "16")
+num_threads=("2" "4" "8")
 path_sequencial="logs_sequencial"
 path_paralelo="logs_paralelo"
 path_all="test_staub"
 
-rm -rf $path_all
-
-mkdir $path_all
-
+mkdir -p $path_all
 
 echo "Executando o sequencial"
 
-rm -rf $path_sequencial
+path_total_sequencial="${path_all}/${path_sequencial}"
 
-mkdir $path_sequencial
+mkdir -p $path_total_sequencial
+
+path_total_paralelo="${path_all}/${path_paralelo}"
+
+mkdir -p $path_total_paralelo
 
 for tamanho in "${tamanhos[@]}"; do
     arquivo="${path_all}/${path_sequencial}/log_seq_${tamanho}_out.txt"
@@ -27,9 +28,6 @@ echo "Finnal da execução sequencial"
 
 echo "Executando o paralelo"
 
-rm -rf $path_paralelo
-
-mkdir $path_paralelo
 
 for tamanho in "${tamanhos[@]}"; do
     for threads in "${num_threads[@]}"; do

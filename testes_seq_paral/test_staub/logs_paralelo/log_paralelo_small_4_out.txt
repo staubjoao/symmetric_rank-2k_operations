@@ -1,0 +1,120 @@
+Executando repetição 1 para small e com 4 threads:
+Tempo paralelo: 70.929011 sec
+
+ Performance counter stats for '../syr2k_paralelo -d small -t 4':
+
+        283.758,52 msec cpu-clock                        #    3,994 CPUs utilized             
+        283.759,25 msec task-clock                       #    3,994 CPUs utilized             
+               839      context-switches                 #    2,957 /sec                      
+               277      cpu-migrations                   #    0,976 /sec                      
+            60.135      page-faults                      #  211,923 /sec                      
+    32.938.563.658      branches                         #  116,079 M/sec                     
+        11.074.905      branch-misses                    #    0,03% of all branches           
+     7.958.947.845      cache-references                 #   28,048 M/sec                     
+     1.576.412.318      cache-misses                     #   19,807 % of all cache refs       
+   781.129.448.060      cycles                           #    2,753 GHz                       
+ 3.278.505.668.235      instructions                     #    4,20  insn per cycle            
+
+      71,040271273 seconds time elapsed
+
+     283,693316000 seconds user
+       0,064002000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para small e com 4 threads:
+Tempo paralelo: 70.865204 sec
+
+ Performance counter stats for '../syr2k_paralelo -d small -t 4':
+
+        283.531,76 msec cpu-clock                        #    3,995 CPUs utilized             
+        283.532,35 msec task-clock                       #    3,995 CPUs utilized             
+               668      context-switches                 #    2,356 /sec                      
+               255      cpu-migrations                   #    0,899 /sec                      
+            60.133      page-faults                      #  212,085 /sec                      
+    32.938.241.837      branches                         #  116,171 M/sec                     
+        10.922.118      branch-misses                    #    0,03% of all branches           
+     7.968.180.451      cache-references                 #   28,103 M/sec                     
+     1.543.789.847      cache-misses                     #   19,374 % of all cache refs       
+   781.056.579.089      cycles                           #    2,755 GHz                       
+ 3.278.504.122.317      instructions                     #    4,20  insn per cycle            
+
+      70,975932615 seconds time elapsed
+
+     283,471237000 seconds user
+       0,059997000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para small e com 4 threads:
+Tempo paralelo: 70.916157 sec
+
+ Performance counter stats for '../syr2k_paralelo -d small -t 4':
+
+        283.569,83 msec cpu-clock                        #    3,992 CPUs utilized             
+        283.570,42 msec task-clock                       #    3,992 CPUs utilized             
+               648      context-switches                 #    2,285 /sec                      
+               244      cpu-migrations                   #    0,860 /sec                      
+            60.132      page-faults                      #  212,053 /sec                      
+    32.938.235.498      branches                         #  116,156 M/sec                     
+        11.068.703      branch-misses                    #    0,03% of all branches           
+     7.979.288.525      cache-references                 #   28,139 M/sec                     
+     1.495.878.384      cache-misses                     #   18,747 % of all cache refs       
+   781.020.341.232      cycles                           #    2,754 GHz                       
+ 3.278.503.904.260      instructions                     #    4,20  insn per cycle            
+
+      71,027040114 seconds time elapsed
+
+     283,513557000 seconds user
+       0,055998000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para small e com 4 threads:
+Tempo paralelo: 72.429271 sec
+
+ Performance counter stats for '../syr2k_paralelo -d small -t 4':
+
+        289.774,23 msec cpu-clock                        #    3,995 CPUs utilized             
+        289.774,83 msec task-clock                       #    3,995 CPUs utilized             
+               653      context-switches                 #    2,253 /sec                      
+               276      cpu-migrations                   #    0,952 /sec                      
+            60.132      page-faults                      #  207,513 /sec                      
+    32.939.277.346      branches                         #  113,672 M/sec                     
+        10.937.286      branch-misses                    #    0,03% of all branches           
+     7.985.338.871      cache-references                 #   27,557 M/sec                     
+     1.515.067.108      cache-misses                     #   18,973 % of all cache refs       
+   780.962.795.445      cycles                           #    2,695 GHz                       
+ 3.278.510.392.061      instructions                     #    4,20  insn per cycle            
+
+      72,540080253 seconds time elapsed
+
+     289,705770000 seconds user
+       0,067998000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para small e com 4 threads:
+Tempo paralelo: 80.118893 sec
+
+ Performance counter stats for '../syr2k_paralelo -d small -t 4':
+
+        320.499,91 msec cpu-clock                        #    3,995 CPUs utilized             
+        320.500,63 msec task-clock                       #    3,995 CPUs utilized             
+               755      context-switches                 #    2,356 /sec                      
+               299      cpu-migrations                   #    0,933 /sec                      
+            60.134      page-faults                      #  187,625 /sec                      
+    32.944.779.746      branches                         #  102,792 M/sec                     
+        10.974.313      branch-misses                    #    0,03% of all branches           
+     8.010.619.144      cache-references                 #   24,994 M/sec                     
+     1.483.477.780      cache-misses                     #   18,519 % of all cache refs       
+   780.838.738.677      cycles                           #    2,436 GHz                       
+ 3.278.544.542.554      instructions                     #    4,20  insn per cycle            
+
+      80,230293752 seconds time elapsed
+
+     320,447347000 seconds user
+       0,051996000 seconds sys
+
+
+----------------------------------------
