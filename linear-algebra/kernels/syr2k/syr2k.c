@@ -148,9 +148,9 @@ int main(int argc, char **argv)
         if (strcmp(arguments.size, "small") == 0)
             tamanho_matriz = 3200;
         else if (strcmp(arguments.size, "medium") == 0)
-            tamanho_matriz = 4000;
+            tamanho_matriz = 4432;
         else if (strcmp(arguments.size, "large") == 0)
-            tamanho_matriz = 4800;
+            tamanho_matriz = 5664;
     }
 
     int ni = tamanho_matriz;
