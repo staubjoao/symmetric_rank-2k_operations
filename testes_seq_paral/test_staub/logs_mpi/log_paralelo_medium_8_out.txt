@@ -1,0 +1,240 @@
+Executando repetição 1 para medium e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 0.000106 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d medium':
+
+          1.927,08 msec cpu-clock                        #    3,717 CPUs utilized             
+          1.928,41 msec task-clock                       #    3,719 CPUs utilized             
+             9.686      context-switches                 #    5,025 K/sec                     
+               148      cpu-migrations                   #   76,774 /sec                      
+            11.891      page-faults                      #    6,168 K/sec                     
+       463.356.917      branches                         #  240,362 M/sec                       (52,94%)
+         2.647.562      branch-misses                    #    0,57% of all branches             (53,65%)
+         5.343.217      cache-references                 #    2,772 M/sec                       (53,09%)
+         2.048.554      cache-misses                     #   38,339 % of all cache refs         (52,76%)
+     6.093.516.494      cycles                           #    3,161 GHz                         (53,61%)
+     2.000.350.957      instructions                     #    0,33  insn per cycle              (52,21%)
+
+       0,518482494 seconds time elapsed
+
+       0,325359000 seconds user
+       1,603444000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para medium e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 0.000159 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d medium':
+
+          1.870,28 msec cpu-clock                        #    3,832 CPUs utilized             
+          1.871,50 msec task-clock                       #    3,834 CPUs utilized             
+             9.106      context-switches                 #    4,867 K/sec                     
+               167      cpu-migrations                   #   89,262 /sec                      
+            11.933      page-faults                      #    6,378 K/sec                     
+       285.285.276      branches                         #  152,486 M/sec                       (51,23%)
+         2.241.446      branch-misses                    #    0,79% of all branches             (54,09%)
+         5.685.562      cache-references                 #    3,039 M/sec                       (51,28%)
+         1.867.500      cache-misses                     #   32,846 % of all cache refs         (52,14%)
+     5.646.036.503      cycles                           #    3,018 GHz                         (53,75%)
+     1.513.701.520      instructions                     #    0,27  insn per cycle              (50,67%)
+
+       0,488123064 seconds time elapsed
+
+       0,173137000 seconds user
+       1,698583000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para medium e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 0.000148 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d medium':
+
+          2.154,82 msec cpu-clock                        #    4,142 CPUs utilized             
+          2.156,13 msec task-clock                       #    4,145 CPUs utilized             
+             9.732      context-switches                 #    4,515 K/sec                     
+               160      cpu-migrations                   #   74,229 /sec                      
+            11.912      page-faults                      #    5,526 K/sec                     
+       633.143.322      branches                         #  293,737 M/sec                       (52,52%)
+         2.830.602      branch-misses                    #    0,45% of all branches             (54,39%)
+         5.139.614      cache-references                 #    2,384 M/sec                       (52,20%)
+         2.018.820      cache-misses                     #   39,280 % of all cache refs         (53,30%)
+     6.690.879.685      cycles                           #    3,104 GHz                         (52,70%)
+     2.848.910.096      instructions                     #    0,43  insn per cycle              (52,11%)
+
+       0,520174429 seconds time elapsed
+
+       0,415849000 seconds user
+       1,731558000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para medium e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 0.000113 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d medium':
+
+          1.775,54 msec cpu-clock                        #    3,515 CPUs utilized             
+          1.776,88 msec task-clock                       #    3,517 CPUs utilized             
+             9.689      context-switches                 #    5,455 K/sec                     
+               153      cpu-migrations                   #   86,138 /sec                      
+            11.935      page-faults                      #    6,719 K/sec                     
+       273.827.299      branches                         #  154,164 M/sec                       (52,62%)
+         2.321.377      branch-misses                    #    0,85% of all branches             (52,70%)
+         6.224.735      cache-references                 #    3,505 M/sec                       (52,28%)
+         2.182.156      cache-misses                     #   35,056 % of all cache refs         (54,72%)
+     5.003.060.050      cycles                           #    2,817 GHz                         (52,24%)
+     1.145.537.207      instructions                     #    0,23  insn per cycle              (50,29%)
+
+       0,505170697 seconds time elapsed
+
+       0,199375000 seconds user
+       1,577927000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para medium e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 0.000083 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d medium':
+
+          2.066,87 msec cpu-clock                        #    3,978 CPUs utilized             
+          2.068,40 msec task-clock                       #    3,981 CPUs utilized             
+             9.415      context-switches                 #    4,554 K/sec                     
+               127      cpu-migrations                   #   61,423 /sec                      
+            11.924      page-faults                      #    5,767 K/sec                     
+       772.684.324      branches                         #  373,704 M/sec                       (51,98%)
+         2.925.182      branch-misses                    #    0,38% of all branches             (50,90%)
+         5.182.394      cache-references                 #    2,506 M/sec                       (52,40%)
+         1.582.797      cache-misses                     #   30,542 % of all cache refs         (52,88%)
+     5.952.933.853      cycles                           #    2,879 GHz                         (51,42%)
+     3.488.953.086      instructions                     #    0,59  insn per cycle              (50,72%)
+
+       0,519586122 seconds time elapsed
+
+       0,641921000 seconds user
+       1,428174000 seconds sys
+
+
+----------------------------------------

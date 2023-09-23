@@ -85,11 +85,14 @@ int main(int argc, char **argv)
         if (arguments.size != NULL)
         {
             if (strcmp(arguments.size, "small") == 0)
-                n = 3200;
+                // n = 3200;
+                n = 8;
             else if (strcmp(arguments.size, "medium") == 0)
-                n = 4432;
+                // n = 4432;
+                n = 16;
             else if (strcmp(arguments.size, "large") == 0)
-                n = 5664;
+                // n = 5664;
+                n = 32;
         }
         debug = arguments.debug;
     }
