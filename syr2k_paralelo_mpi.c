@@ -5,11 +5,49 @@
 #include <string.h>
 #include <mpi.h>
 
+#include <argp.h>
+
+struct arguments
+{
+    char *size;
+    int num_threads;
+    int debug;
+};
+
+static struct argp_option options[] = {
+    {"size", 'd', "SIZE", 0, "Specify matrix size (small, medium, or large)"},
+    {"debug", 'D', 0, 0, "Print debug information"},
+    {"help", 'h', 0, 0, "Print this help message"},
+    {0}};
+
+static error_t parse_opt(int key, char *arg, struct argp_state *state)
+{
+    struct arguments *arguments = state->input;
+
+    switch (key)
+    {
+    case 'd':
+        arguments->size = arg;
+        break;
+    case 'D':
+        arguments->debug = 1;
+        break;
+    case 'h':
+        argp_state_help(state, stdout, ARGP_HELP_STD_HELP);
+        exit(0);
+    default:
+        return ARGP_ERR_UNKNOWN;
+    }
+    return 0;
+}
+
+static struct argp argp = {options, parse_opt, NULL, NULL};
+
 void verificar_erro(int teste_local, char fname[], char mensagem[], MPI_Comm comm);
 void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n, int n_local, MPI_Comm comm);
 void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
 void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
-void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, MPI_Comm comm);
+void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, int debug, MPI_Comm comm);
 void kernel_syr2k(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 
 const double alpha = 32412;
@@ -20,7 +58,7 @@ int main(int argc, char **argv)
     double *A_local;
     double *B_local;
     double *C_local;
-    int n, n_local;
+    int n, n_local, debug;
     int rank, size, root = 0;
     MPI_Comm comm;
 
@@ -31,25 +69,33 @@ int main(int argc, char **argv)
 
     if (rank == root)
     {
-        for (int i = 0; i < argc; i++)
+        struct arguments arguments;
+        arguments.size = NULL;
+        arguments.num_threads = 0;
+        arguments.debug = 0;
+
+        argp_parse(&argp, argc, argv, 0, 0, &arguments);
+
+        if (arguments.size == NULL)
         {
-            if (!strcmp(argv[i], "-d"))
-            {
-                if (strcmp(argv[i + 1], "small") == 0)
-                    // n = 1600;
-                    n = 3200;
-                else if (strcmp(argv[i + 1], "medium") == 0)
-                    // n = 2400;
-                    n = 4000;
-                else if (strcmp(argv[i + 1], "large") == 0)
-                    // n = 3200;
-                    n = 4800;
-                i++;
-            }
+            fprintf(stderr, "O argumento -d. Use -h para ver os comandos.\n");
+            exit(1);
         }
+
+        if (arguments.size != NULL)
+        {
+            if (strcmp(arguments.size, "small") == 0)
+                n = 3200;
+            else if (strcmp(arguments.size, "medium") == 0)
+                n = 4432;
+            else if (strcmp(arguments.size, "large") == 0)
+                n = 5664;
+        }
+        debug = arguments.debug;
     }
 
     MPI_Bcast(&n, 1, MPI_INT, root, MPI_COMM_WORLD);
+    MPI_Bcast(&debug, 1, MPI_INT, root, MPI_COMM_WORLD);
 
     n_local = n / size;
 
@@ -60,7 +106,7 @@ int main(int argc, char **argv)
     kernel_syr2k(A_local, B_local, C_local, n, n_local, rank, comm);
     double end = MPI_Wtime();
 
-    imprimir_matriz_resultante(C_local, n, n_local, rank, start, end, comm);
+    imprimir_matriz_resultante(C_local, n, n_local, rank, start, end, debug, comm);
 
     free(A_local);
     free(B_local);
@@ -203,6 +249,7 @@ void imprimir_matriz_resultante(
     int rank /* entrada */,
     double start,
     double end,
+    int debug,
     MPI_Comm comm /* entrada */)
 {
     double *C = NULL;
@@ -218,11 +265,14 @@ void imprimir_matriz_resultante(
 
         fprintf(stderr, "Tempo mpi: %lf sec\n", end - start);
 
-        for (i = 0; i < n; i++)
+        if (debug)
         {
-            for (j = 0; j < n; j++)
-                fprintf(stderr, "%0.2lf ", C[i * n + j]);
-            fprintf(stderr, "\n");
+            for (i = 0; i < n; i++)
+            {
+                for (j = 0; j < n; j++)
+                    fprintf(stderr, "%0.2lf ", C[i * n + j]);
+                fprintf(stderr, "\n");
+            }
         }
         free(C);
     }
