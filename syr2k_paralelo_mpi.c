@@ -85,14 +85,14 @@ int main(int argc, char **argv)
         if (arguments.size != NULL)
         {
             if (strcmp(arguments.size, "small") == 0)
-                n = 3200;
-            // n = 8;
+                // n = 3200;
+                n = 8;
             else if (strcmp(arguments.size, "medium") == 0)
-                n = 4432;
-            // n = 16;
+                // n = 4432;
+                n = 16;
             else if (strcmp(arguments.size, "large") == 0)
-                n = 5664;
-            // n = 32;
+                // n = 5664;
+                n = 32;
         }
         debug = arguments.debug;
     }
@@ -266,16 +266,19 @@ void imprimir_matriz_resultante(
         verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
         MPI_Gather(C_local, n_local * n, MPI_DOUBLE, C, n_local * n, MPI_DOUBLE, 0, comm);
 
-        fprintf(stderr, "Tempo mpi: %lf sec\n", end - start);
+        printf("Tempo mpi: %lf sec\n", end - start);
 
         if (debug)
         {
+
             for (i = 0; i < n; i++)
-            {
                 for (j = 0; j < n; j++)
+                {
                     fprintf(stderr, "%0.2lf ", C[i * n + j]);
-                fprintf(stderr, "\n");
-            }
+                    if ((i * n + j) % 20 == 0)
+                        fprintf(stderr, "\n");
+                }
+            fprintf(stderr, "\n");
         }
         free(C);
     }
