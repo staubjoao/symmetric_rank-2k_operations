@@ -3,6 +3,8 @@
 #include <string.h>
 #include <mpi.h>
 
+#include <pthread.h>
+
 #include <argp.h>
 
 struct arguments
@@ -46,17 +48,48 @@ void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n
 void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
 void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, int debug, MPI_Comm comm);
-void kernel_syr2k(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
+void kernel_syr2k_mpi_aux(int n_local, MPI_Comm comm);
 
 const double alpha = 32412;
 const double beta = 2123;
 
+double *A, *B, *C;
+double *A_local, *B_local, *C_local;
+int n_threads, passo, resto;
+int n;
+
+pthread_barrier_t barreira;
+
+void *kernel_syr2k_trabalhador(void *arg)
+{
+    int id_thread = *((int *)arg);
+    int inicio = id_thread * passo;
+    int passolocal = passo;
+    int i, j, k;
+
+    if (id_thread == n_threads - 1)
+        passolocal += resto;
+
+    for (i = inicio; i < inicio + passolocal; i++)
+        for (j = 0; j < n; j++)
+            C_local[i * n + j] *= beta;
+    pthread_barrier_wait(&barreira);
+    for (i = inicio; i < inicio + passolocal; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            for (k = 0; k < n; k++)
+            {
+                C_local[i * n + j] += alpha * A_local[i * n + k] * B[j * n + k];
+                C_local[i * n + j] += alpha * B_local[i * n + k] * A[j * n + k];
+            }
+        }
+    }
+}
+
 int main(int argc, char **argv)
 {
-    double *A_local;
-    double *B_local;
-    double *C_local;
-    int n, n_local, debug;
+    int n_local, debug;
     int rank, size, root = 0;
     MPI_Comm comm;
 
@@ -93,10 +126,13 @@ int main(int argc, char **argv)
                 n = 32;
         }
         debug = arguments.debug;
+
+        n_threads = 2;
     }
 
     MPI_Bcast(&n, 1, MPI_INT, root, MPI_COMM_WORLD);
     MPI_Bcast(&debug, 1, MPI_INT, root, MPI_COMM_WORLD);
+    MPI_Bcast(&n_threads, 1, MPI_INT, root, MPI_COMM_WORLD);
 
     n_local = n / size;
 
@@ -104,7 +140,7 @@ int main(int argc, char **argv)
     inicia_matrizes(A_local, B_local, C_local, n, n_local, rank, comm);
 
     double start = MPI_Wtime();
-    kernel_syr2k(A_local, B_local, C_local, n, n_local, rank, comm);
+    kernel_syr2k_mpi_aux(n_local, comm);
     double end = MPI_Wtime();
 
     imprimir_matriz_resultante(C_local, n, n_local, rank, start, end, debug, comm);
@@ -278,6 +314,7 @@ void imprimir_matriz_resultante(
                 }
             fprintf(stderr, "\n");
         }
+        fprintf(stderr, "\nteste\n");
         free(C);
     }
     else
@@ -287,17 +324,10 @@ void imprimir_matriz_resultante(
     }
 }
 
-void kernel_syr2k(
-    double A_local[] /* entrada  */,
-    double B_local[] /* entrada  */,
-    double C_local[] /* entrada e saida  */,
-    int n /* entrada  */,
+void kernel_syr2k_mpi_aux(
     int n_local /* entrada  */,
-    int rank /* entrada */,
     MPI_Comm comm /* entrada  */)
 {
-    double *A, *B;
-    int i, j, k;
     int teste_local = 1;
 
     A = malloc(n * n * sizeof(double));
@@ -309,18 +339,21 @@ void kernel_syr2k(
     MPI_Allgather(A_local, n_local * n, MPI_DOUBLE, A, n_local * n, MPI_DOUBLE, comm);
     MPI_Allgather(B_local, n_local * n, MPI_DOUBLE, B, n_local * n, MPI_DOUBLE, comm);
 
-    for (i = 0; i < n_local; i++)
-        for (j = 0; j < n; j++)
-            C_local[i * n + j] *= beta;
-    MPI_Barrier(comm);
+    passo = (n / n_threads);
+    resto = (n % n_threads);
+    pthread_t threads[n_threads];
+    int id_thread[n_threads];
 
-    for (i = 0; i < n_local; i++)
-        for (j = 0; j < n; j++)
-            for (k = 0; k < n; k++)
-            {
-                C_local[i * n + j] += alpha * A_local[i * n + k] * B[j * n + k];
-                C_local[i * n + j] += alpha * B_local[i * n + k] * A[j * n + k];
-            }
+    pthread_barrier_init(&barreira, NULL, n_threads);
+
+    for (int t = 0; t < n_threads; ++t)
+    {
+        id_thread[t] = t;
+        pthread_create(&threads[t], NULL, kernel_syr2k_trabalhador, (void *)&id_thread[t]);
+    }
+
+    for (int t = 0; t < n_threads; ++t)
+        pthread_join(threads[t], NULL);
 
     free(A);
     free(B);

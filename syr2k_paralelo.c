@@ -17,7 +17,7 @@ struct arguments
 };
 
 static struct argp_option options[] = {
-    {"size", 'd', "SIZE", 0, "Specify matrix size (small, medium, or large)"},
+    {"size", 'd', "SIZE", 0, "Specify matrix size (small, medium or large)"},
     {"threads", 't', "NUM", 0, "Specify number of threads"},
     {"debug", 'D', 0, 0, "Print debug information"},
     {"help", 'h', 0, 0, "Print this help message"},
@@ -132,7 +132,6 @@ void *kernel_syr2k_paralelo(void *arg)
     if (id_thread == n_threads - 1)
         passolocal += resto;
 
-#pragma scop
     for (i = inicio; i < inicio + passolocal; i++)
         for (j = 0; j < ni; j++)
             C[i][j] *= beta;
@@ -144,7 +143,6 @@ void *kernel_syr2k_paralelo(void *arg)
                 C[i][j] += alpha * A[i][k] * B[j][k];
                 C[i][j] += alpha * B[i][k] * A[j][k];
             }
-#pragma endscop
 }
 
 int main(int argc, char **argv)
@@ -165,7 +163,8 @@ int main(int argc, char **argv)
     if (arguments.size != NULL)
     {
         if (strcmp(arguments.size, "small") == 0)
-            tamanho_matriz = 3200;
+            // tamanho_matriz = 3200;
+            tamanho_matriz = 8;
         else if (strcmp(arguments.size, "medium") == 0)
             tamanho_matriz = 4432;
         else if (strcmp(arguments.size, "large") == 0)
