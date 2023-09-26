@@ -1,0 +1,111 @@
+Executando repetição 1 para large e com 16 threads:
+Tempo mpi: 151.336259 sec
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d large':
+
+     27.375.541,41 msec cpu-clock                        #    2,694 CPUs utilized             
+     27.521.695,00 msec task-clock                       #    2,708 CPUs utilized             
+       300.684.305      context-switches                 #   10,954 K/sec                     
+         6.133.900      cpu-migrations                   #  223,468 /sec                      
+       611.131.550      page-faults                      #   22,265 K/sec                     
+ 6.468.968.345.079      branches                         #  235,676 M/sec                       (83,33%)
+   137.849.007.368      branch-misses                    #    2,13% of all branches             (83,34%)
+ 2.238.561.903.471      cache-references                 #   81,555 M/sec                       (83,33%)
+   477.670.850.021      cache-misses                     #   21,338 % of all cache refs         (83,34%)
+108.904.948.870.337      cycles                           #    3,968 GHz                         (83,33%)
+46.957.043.565.837      instructions                     #    0,43  insn per cycle              (83,33%)
+
+   10162,746417877 seconds time elapsed
+
+    3080,760434000 seconds user
+   24511,500401000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para large e com 16 threads:
+[mpiexec@ubuntu-greff] Sending Ctrl-C to processes as requested
+[mpiexec@ubuntu-greff] Press Ctrl-C again to force abort
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d large':
+
+     23.801.207,86 msec cpu-clock                        #    2,729 CPUs utilized             
+     23.937.945,33 msec task-clock                       #    2,745 CPUs utilized             
+       268.534.617      context-switches                 #   11,250 K/sec                     
+         5.443.368      cpu-migrations                   #  228,046 /sec                      
+       545.635.881      page-faults                      #   22,859 K/sec                     
+ 5.615.556.198.344      branches                         #  235,260 M/sec                       (83,34%)
+   120.457.479.362      branch-misses                    #    2,15% of all branches             (83,35%)
+ 1.996.406.659.309      cache-references                 #   83,638 M/sec                       (83,33%)
+   427.411.602.516      cache-misses                     #   21,409 % of all cache refs         (83,32%)
+93.867.861.604.154      cycles                           #    3,933 GHz                         (83,33%)
+41.393.118.596.912      instructions                     #    0,44  insn per cycle              (83,34%)
+
+    8721,653152220 seconds time elapsed
+
+    2766,988175000 seconds user
+   21227,670097000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para large e com 16 threads:
+[mpiexec@ubuntu-greff] Sending Ctrl-C to processes as requested
+[mpiexec@ubuntu-greff] Press Ctrl-C again to force abort
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d large':
+
+         20.746,98 msec cpu-clock                        #   12,402 CPUs utilized             
+         20.752,67 msec task-clock                       #   12,406 CPUs utilized             
+            20.445      context-switches                 #  985,309 /sec                      
+               843      cpu-migrations                   #   40,627 /sec                      
+           404.005      page-faults                      #   19,470 K/sec                     
+     3.303.105.425      branches                         #  159,187 M/sec                       (83,38%)
+        58.071.104      branch-misses                    #    1,76% of all branches             (83,28%)
+       557.775.663      cache-references                 #   26,881 M/sec                       (83,38%)
+        52.003.191      cache-misses                     #    9,323 % of all cache refs         (83,21%)
+    41.317.328.148      cycles                           #    1,991 GHz                         (83,37%)
+    17.512.966.671      instructions                     #    0,42  insn per cycle              (83,64%)
+
+       1,672841617 seconds time elapsed
+
+       4,392451000 seconds user
+      16,338584000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para large e com 16 threads:
+[mpiexec@ubuntu-greff] Sending Ctrl-C to processes as requested
+[mpiexec@ubuntu-greff] Press Ctrl-C again to force abort
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 37759 RUNNING AT ubuntu-greff
+=   EXIT CODE: 9
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Killed (signal 9)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d large':
+
+          1.849,08 msec cpu-clock                        #    4,582 CPUs utilized             
+          1.850,14 msec task-clock                       #    4,585 CPUs utilized             
+            16.752      context-switches                 #    9,057 K/sec                     
+               321      cpu-migrations                   #  173,550 /sec                      
+            11.226      page-faults                      #    6,069 K/sec                     
+       287.360.127      branches                         #  155,363 M/sec                       (83,77%)
+         3.796.062      branch-misses                    #    1,32% of all branches             (81,97%)
+        71.706.091      cache-references                 #   38,768 M/sec                       (82,54%)
+         8.019.109      cache-misses                     #   11,183 % of all cache refs         (85,16%)
+     6.805.388.273      cycles                           #    3,679 GHz                         (83,93%)
+     1.313.340.187      instructions                     #    0,19  insn per cycle              (84,04%)
+
+       0,403515052 seconds time elapsed
+
+       0,078608000 seconds user
+       1,784362000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para large e com 16 threads:

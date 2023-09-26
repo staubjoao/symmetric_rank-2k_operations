@@ -1,0 +1,120 @@
+Executando repetição 1 para medium e com 16 threads:
+Tempo mpi: 176.051859 sec
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d medium':
+
+      2.850.178,26 msec cpu-clock                        #   15,948 CPUs utilized             
+      2.850.207,57 msec task-clock                       #   15,948 CPUs utilized             
+            32.164      context-switches                 #   11,285 /sec                      
+               486      cpu-migrations                   #    0,171 /sec                      
+         1.756.026      page-faults                      #  616,108 /sec                      
+   100.077.483.155      branches                         #   35,113 M/sec                       (83,33%)
+       194.946.258      branch-misses                    #    0,19% of all branches             (83,33%)
+   179.486.772.691      cache-references                 #   62,974 M/sec                       (83,33%)
+     1.536.897.937      cache-misses                     #    0,856 % of all cache refs         (83,33%)
+ 4.867.615.205.408      cycles                           #    1,708 GHz                         (83,34%)
+ 8.071.780.034.077      instructions                     #    1,66  insn per cycle              (83,34%)
+
+     178,718617404 seconds time elapsed
+
+    2809,289976000 seconds user
+      40,629093000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para medium e com 16 threads:
+Tempo mpi: 175.812745 sec
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d medium':
+
+      2.847.820,91 msec cpu-clock                        #   15,954 CPUs utilized             
+      2.847.846,35 msec task-clock                       #   15,955 CPUs utilized             
+            30.242      context-switches                 #   10,619 /sec                      
+               641      cpu-migrations                   #    0,225 /sec                      
+         1.756.025      page-faults                      #  616,618 /sec                      
+    97.813.761.836      branches                         #   34,347 M/sec                       (83,34%)
+       157.272.830      branch-misses                    #    0,16% of all branches             (83,33%)
+   177.859.349.497      cache-references                 #   62,454 M/sec                       (83,33%)
+     1.362.197.102      cache-misses                     #    0,766 % of all cache refs         (83,33%)
+ 4.880.368.254.541      cycles                           #    1,714 GHz                         (83,34%)
+ 8.066.814.219.290      instructions                     #    1,65  insn per cycle              (83,33%)
+
+     178,497680417 seconds time elapsed
+
+    2810,667961000 seconds user
+      36,927020000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para medium e com 16 threads:
+Tempo mpi: 176.969198 sec
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d medium':
+
+      2.848.593,40 msec cpu-clock                        #   15,956 CPUs utilized             
+      2.848.617,94 msec task-clock                       #   15,956 CPUs utilized             
+            28.867      context-switches                 #   10,134 /sec                      
+               555      cpu-migrations                   #    0,195 /sec                      
+         1.755.680      page-faults                      #  616,330 /sec                      
+    97.214.357.731      branches                         #   34,127 M/sec                       (83,33%)
+       150.499.105      branch-misses                    #    0,15% of all branches             (83,33%)
+   177.642.415.927      cache-references                 #   62,361 M/sec                       (83,33%)
+     1.365.110.301      cache-misses                     #    0,768 % of all cache refs         (83,33%)
+ 4.858.807.045.872      cycles                           #    1,706 GHz                         (83,33%)
+ 8.057.430.862.620      instructions                     #    1,66  insn per cycle              (83,33%)
+
+     178,527822337 seconds time elapsed
+
+    2814,057590000 seconds user
+      34,323762000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para medium e com 16 threads:
+Tempo mpi: 177.161860 sec
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d medium':
+
+      2.847.301,77 msec cpu-clock                        #   15,961 CPUs utilized             
+      2.847.327,24 msec task-clock                       #   15,961 CPUs utilized             
+            29.472      context-switches                 #   10,351 /sec                      
+               441      cpu-migrations                   #    0,155 /sec                      
+         1.755.806      page-faults                      #  616,653 /sec                      
+    97.286.034.864      branches                         #   34,168 M/sec                       (83,33%)
+       154.637.530      branch-misses                    #    0,16% of all branches             (83,33%)
+   177.777.119.252      cache-references                 #   62,437 M/sec                       (83,33%)
+     1.371.790.350      cache-misses                     #    0,772 % of all cache refs         (83,33%)
+ 4.860.466.940.817      cycles                           #    1,707 GHz                         (83,33%)
+ 8.056.696.072.476      instructions                     #    1,66  insn per cycle              (83,33%)
+
+     178,387492328 seconds time elapsed
+
+    2815,208518000 seconds user
+      31,868566000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para medium e com 16 threads:
+Tempo mpi: 176.213758 sec
+
+ Performance counter stats for 'mpirun -np 16 ../syr2k_paralelo_mpi -d medium':
+
+      2.852.098,84 msec cpu-clock                        #   15,957 CPUs utilized             
+      2.852.129,69 msec task-clock                       #   15,957 CPUs utilized             
+            29.882      context-switches                 #   10,477 /sec                      
+               522      cpu-migrations                   #    0,183 /sec                      
+         1.755.653      page-faults                      #  615,562 /sec                      
+    96.913.601.441      branches                         #   33,980 M/sec                       (83,33%)
+       156.978.857      branch-misses                    #    0,16% of all branches             (83,33%)
+   178.030.845.427      cache-references                 #   62,421 M/sec                       (83,33%)
+     1.371.708.533      cache-misses                     #    0,770 % of all cache refs         (83,33%)
+ 4.865.439.205.203      cycles                           #    1,706 GHz                         (83,33%)
+ 8.058.412.025.844      instructions                     #    1,66  insn per cycle              (83,34%)
+
+     178,735510570 seconds time elapsed
+
+    2815,870156000 seconds user
+      35,998189000 seconds sys
+
+
+----------------------------------------
