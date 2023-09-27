@@ -1,0 +1,36 @@
+Executando repetição 1 para small e com 4 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 2.611371 sec
+
+ Performance counter stats for 'mpirun -np 4 ../syr2k_paralelo_mpi -d small':
+
+         11.113,75 msec cpu-clock                        #    3,690 CPUs utilized             
+         11.114,25 msec task-clock                       #    3,690 CPUs utilized             
+             4.877      context-switches                 #  438,816 /sec                      
+                70      cpu-migrations                   #    6,298 /sec                      
+            44.704      page-faults                      #    4,022 K/sec                     
+     1.412.175.192      branches                         #  127,063 M/sec                     
+         2.352.761      branch-misses                    #    0,17% of all branches           
+       267.584.291      cache-references                 #   24,076 M/sec                     
+        63.496.561      cache-misses                     #   23,730 % of all cache refs       
+    27.864.584.675      cycles                           #    2,507 GHz                       
+   100.491.774.800      instructions                     #    3,61  insn per cycle            
+
+       3,012063517 seconds time elapsed
+
+      10,717584000 seconds user
+       0,398639000 seconds sys
+
+
+----------------------------------------

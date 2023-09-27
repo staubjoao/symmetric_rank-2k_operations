@@ -1,0 +1,24 @@
+Executando repetição 1 para large e com 4 threads:
+Tempo paralelo: 148.141558 sec
+
+ Performance counter stats for '../syr2k_paralelo -d large -t 4':
+
+        592.282,93 msec cpu-clock                        #    3,993 CPUs utilized             
+        592.284,53 msec task-clock                       #    3,993 CPUs utilized             
+             2.099      context-switches                 #    3,544 /sec                      
+               543      cpu-migrations                   #    0,917 /sec                      
+            98.453      page-faults                      #  166,226 /sec                      
+    69.022.927.500      branches                         #  116,537 M/sec                     
+        18.919.874      branch-misses                    #    0,03% of all branches           
+    16.586.451.865      cache-references                 #   28,004 M/sec                     
+     3.709.277.038      cache-misses                     #   22,363 % of all cache refs       
+ 1.637.876.947.166      cycles                           #    2,765 GHz                       
+ 6.874.890.674.015      instructions                     #    4,20  insn per cycle            
+
+     148,317020838 seconds time elapsed
+
+     592,175043000 seconds user
+       0,103997000 seconds sys
+
+
+----------------------------------------

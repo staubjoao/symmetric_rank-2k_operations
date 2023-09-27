@@ -1,6 +1,6 @@
 #!/bin/bash
 
-repeticoes=5
+repeticoes=1
 
 programa="../syr2k_paralelo_mpi"
 

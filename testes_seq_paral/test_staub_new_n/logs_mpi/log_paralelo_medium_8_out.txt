@@ -1,0 +1,48 @@
+Executando repetição 1 para medium e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 20.782595 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d medium':
+
+        169.446,73 msec cpu-clock                        #    7,865 CPUs utilized             
+        169.448,36 msec task-clock                       #    7,865 CPUs utilized             
+            11.561      context-switches                 #   68,228 /sec                      
+               142      cpu-migrations                   #    0,838 /sec                      
+           228.521      page-faults                      #    1,349 K/sec                     
+    10.455.507.303      branches                         #   61,704 M/sec                     
+         7.126.856      branch-misses                    #    0,07% of all branches           
+     2.153.085.538      cache-references                 #   12,707 M/sec                     
+       602.688.940      cache-misses                     #   27,992 % of all cache refs       
+   410.808.884.304      cycles                           #    2,424 GHz                       
+   799.677.305.992      instructions                     #    1,95  insn per cycle            
+
+      21,543442195 seconds time elapsed
+
+     167,373932000 seconds user
+       2,069911000 seconds sys
+
+
+----------------------------------------
