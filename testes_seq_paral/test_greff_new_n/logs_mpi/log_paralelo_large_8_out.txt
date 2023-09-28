@@ -1,0 +1,24 @@
+Executando repetição 1 para large e com 8 threads:
+Tempo mpi: 137.494144 sec
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_paralelo_mpi -d large':
+
+      1.105.724,71 msec cpu-clock                        #    7,986 CPUs utilized             
+      1.105.729,04 msec task-clock                       #    7,986 CPUs utilized             
+            10.298      context-switches                 #    9,313 /sec                      
+               454      cpu-migrations                   #    0,411 /sec                      
+           895.639      page-faults                      #  810,000 /sec                      
+    72.447.271.565      branches                         #   65,520 M/sec                       (83,33%)
+        61.455.285      branch-misses                    #    0,08% of all branches             (83,33%)
+    92.799.850.164      cache-references                 #   83,927 M/sec                       (83,33%)
+       777.524.225      cache-misses                     #    0,838 % of all cache refs         (83,33%)
+ 1.968.484.940.574      cycles                           #    1,780 GHz                         (83,34%)
+ 6.310.478.544.393      instructions                     #    3,21  insn per cycle              (83,33%)
+
+     138,464522072 seconds time elapsed
+
+    1096,154573000 seconds user
+       9,571621000 seconds sys
+
+
+----------------------------------------

@@ -1,0 +1,24 @@
+Executando repetição 1 para medium e com 2 threads:
+Tempo mpi: 28.929755 sec
+
+ Performance counter stats for 'mpirun -np 2 ../syr2k_paralelo_mpi -d medium':
+
+         58.433,02 msec cpu-clock                        #    1,986 CPUs utilized             
+         58.433,69 msec task-clock                       #    1,986 CPUs utilized             
+             2.434      context-switches                 #   41,654 /sec                      
+                46      cpu-migrations                   #    0,787 /sec                      
+            96.140      page-faults                      #    1,645 K/sec                     
+     8.870.274.965      branches                         #  151,802 M/sec                       (83,33%)
+         7.282.909      branch-misses                    #    0,08% of all branches             (83,34%)
+     7.529.828.273      cache-references                 #  128,862 M/sec                       (83,31%)
+        64.683.142      cache-misses                     #    0,859 % of all cache refs         (83,34%)
+   239.017.685.813      cycles                           #    4,090 GHz                         (83,34%)
+   792.045.897.381      instructions                     #    3,31  insn per cycle              (83,33%)
+
+      29,423563358 seconds time elapsed
+
+      58,022998000 seconds user
+       0,418990000 seconds sys
+
+
+----------------------------------------
