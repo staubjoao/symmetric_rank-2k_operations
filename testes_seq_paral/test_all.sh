@@ -1,7 +1,9 @@
 #!/bin/bash
 
 tamanhos=("small" "medium" "large")
-num_threads=("2" "4" "8")
+num_threads=("2" "4" "8" "16")
+quantidade=5
+
 path_sequencial="logs_sequencial"
 path_paralelo="logs_paralelo"
 path_mpi="logs_mpi"
@@ -26,7 +28,7 @@ mkdir -p $path_total_mpi
 for tamanho in "${tamanhos[@]}"; do
     arquivo="${path_all}/${path_sequencial}/log_seq_${tamanho}_out.txt"
     echo "$arquivo"
-    ./test_sy2k_seq.sh $tamanho > $arquivo 2>&1   
+    ./test_sy2k_seq.sh $tamanho $quantidade > $arquivo 2>&1   
 done
 
 echo "Finnal da execução sequencial"
@@ -38,7 +40,7 @@ for tamanho in "${tamanhos[@]}"; do
     for threads in "${num_threads[@]}"; do
         arquivo="${path_all}/${path_paralelo}/log_paralelo_${tamanho}_${threads}_out.txt"
         echo "$arquivo"
-        ./test_sy2k_paralelo.sh $tamanho $threads > $arquivo 2>&1
+        ./test_sy2k_paralelo.sh $tamanho $threads $quantidade > $arquivo 2>&1
     done
 done
 
@@ -53,7 +55,7 @@ for tamanho in "${tamanhos[@]}"; do
     for threads in "${num_threads[@]}"; do
         arquivo="${path_all}/${path_mpi}/log_paralelo_${tamanho}_${threads}_out.txt"
         echo "$arquivo"
-        ./test_mpi.sh $tamanho $threads > $arquivo 2>&1
+        ./test_mpi.sh $tamanho $threads $quantidade > $arquivo 2>&1
     done
 done
 

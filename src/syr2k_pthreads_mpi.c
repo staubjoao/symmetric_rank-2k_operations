@@ -48,7 +48,7 @@ void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n
 void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
 void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, int debug, MPI_Comm comm);
-void kernel_syr2k_mpi_aux(int n_local, MPI_Comm comm);
+void kernel_syr2k_mpi_aux(int n_local, int rank, MPI_Comm comm);
 
 const double alpha = 32412;
 const double beta = 2123;
@@ -56,14 +56,14 @@ const double beta = 2123;
 double *A, *B, *C;
 double *A_local, *B_local, *C_local;
 int n_threads, passo, resto;
-int n;
+int n, inicio_aux;
 
 pthread_barrier_t barreira;
 
 void *kernel_syr2k_trabalhador(void *arg)
 {
     int id_thread = *((int *)arg);
-    int inicio = id_thread * passo;
+    int inicio = inicio_aux + (id_thread * passo);
     int passolocal = passo;
     int i, j, k;
 
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
         {
             if (strcmp(arguments.size, "small") == 0)
                 // n = 3200;
-                n = 8;
+                n = 16;
             else if (strcmp(arguments.size, "medium") == 0)
                 // n = 4432;
                 n = 2048;
@@ -144,7 +144,7 @@ int main(int argc, char **argv)
     inicia_matrizes(A_local, B_local, C_local, n, n_local, rank, comm);
 
     double start = MPI_Wtime();
-    kernel_syr2k_mpi_aux(n_local, comm);
+    kernel_syr2k_mpi_aux(n_local, rank, comm);
     double end = MPI_Wtime();
 
     imprimir_matriz_resultante(C_local, n, n_local, rank, start, end, debug, comm);
@@ -330,9 +330,13 @@ void imprimir_matriz_resultante(
 
 void kernel_syr2k_mpi_aux(
     int n_local /* entrada  */,
+    int rank, /* entrada */
     MPI_Comm comm /* entrada  */)
 {
+
+    printf("rank: %d - n_local: %d\n", rank, n_local);
     int teste_local = 1;
+    int i, j, k;
 
     A = malloc(n * n * sizeof(double));
     B = malloc(n * n * sizeof(double));
@@ -343,10 +347,22 @@ void kernel_syr2k_mpi_aux(
     MPI_Allgather(A_local, n_local * n, MPI_DOUBLE, A, n_local * n, MPI_DOUBLE, comm);
     MPI_Allgather(B_local, n_local * n, MPI_DOUBLE, B, n_local * n, MPI_DOUBLE, comm);
 
-    passo = (n / n_threads);
-    resto = (n % n_threads);
+    passo = (n_local / (n_threads + 1));
+    resto = (n_local % (n_threads + 1));
+
+    printf("teste: passo: %d resto: %d\n", passo, resto);
     pthread_t threads[n_threads];
     int id_thread[n_threads];
+
+    for (i = 0; i < passo; i++)
+        for (j = 0; j < n; j++)
+            for (k = 0; k < n; k++)
+            {
+                C_local[i * n + j] += alpha * A_local[i * n + k] * B[j * n + k];
+                C_local[i * n + j] += alpha * B_local[i * n + k] * A[j * n + k];
+            }
+
+    inicio_aux = passo;
 
     pthread_barrier_init(&barreira, NULL, n_threads);
 
@@ -355,6 +371,8 @@ void kernel_syr2k_mpi_aux(
         id_thread[t] = t;
         pthread_create(&threads[t], NULL, kernel_syr2k_trabalhador, (void *)&id_thread[t]);
     }
+
+    // colocar a exec aqui
 
     for (int t = 0; t < n_threads; ++t)
         pthread_join(threads[t], NULL);

@@ -5,26 +5,146 @@ Pass --enable-32bits-pci-domain to configure to support such devices
 hwloc/linux: Ignoring PCI device with non-16bit domain.
 Pass --enable-32bits-pci-domain to configure to support such devices
 (warning: it would break the library ABI, don't enable unless really needed).
-Tempo mpi: 246.538972 sec
+Tempo mpi: 247.915466 sec
 
  Performance counter stats for 'mpirun -np 2 ../syr2k_paralelo_mpi -d large':
 
-        493.929,50 msec cpu-clock                        #    1,998 CPUs utilized             
-        493.931,03 msec task-clock                       #    1,998 CPUs utilized             
-             4.297      context-switches                 #    8,700 /sec                      
-                62      cpu-migrations                   #    0,126 /sec                      
-           366.633      page-faults                      #  742,277 /sec                      
-    69.903.652.165      branches                         #  141,525 M/sec                     
-        18.236.981      branch-misses                    #    0,03% of all branches           
-    16.609.229.309      cache-references                 #   33,627 M/sec                     
-     4.054.169.368      cache-misses                     #   24,409 % of all cache refs       
- 1.653.264.716.328      cycles                           #    3,347 GHz                       
- 6.329.544.944.813      instructions                     #    3,83  insn per cycle            
+        496.642,33 msec cpu-clock                        #    1,998 CPUs utilized             
+        496.643,75 msec task-clock                       #    1,998 CPUs utilized             
+             4.268      context-switches                 #    8,594 /sec                      
+               106      cpu-migrations                   #    0,213 /sec                      
+           366.637      page-faults                      #  738,230 /sec                      
+    70.038.737.722      branches                         #  141,024 M/sec                     
+        18.271.490      branch-misses                    #    0,03% of all branches           
+    16.568.450.079      cache-references                 #   33,361 M/sec                     
+     4.058.605.396      cache-misses                     #   24,496 % of all cache refs       
+ 1.653.965.997.470      cycles                           #    3,330 GHz                       
+ 6.330.178.845.404      instructions                     #    3,83  insn per cycle            
 
-     247,194065993 seconds time elapsed
+     248,547543787 seconds time elapsed
 
-     493,412744000 seconds user
-       0,516984000 seconds sys
+     496,176826000 seconds user
+       0,466176000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para large e com 2 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 249.370632 sec
+
+ Performance counter stats for 'mpirun -np 2 ../syr2k_paralelo_mpi -d large':
+
+        499.681,56 msec cpu-clock                        #    1,998 CPUs utilized             
+        499.683,06 msec task-clock                       #    1,998 CPUs utilized             
+             4.489      context-switches                 #    8,984 /sec                      
+                76      cpu-migrations                   #    0,152 /sec                      
+           366.643      page-faults                      #  733,752 /sec                      
+    69.961.748.309      branches                         #  140,012 M/sec                     
+        18.187.207      branch-misses                    #    0,03% of all branches           
+    16.347.567.275      cache-references                 #   32,716 M/sec                     
+     4.072.867.178      cache-misses                     #   24,914 % of all cache refs       
+ 1.653.762.033.123      cycles                           #    3,310 GHz                       
+ 6.329.816.931.221      instructions                     #    3,83  insn per cycle            
+
+     250,052461595 seconds time elapsed
+
+     499,218000000 seconds user
+       0,464001000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para large e com 2 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 249.602291 sec
+
+ Performance counter stats for 'mpirun -np 2 ../syr2k_paralelo_mpi -d large':
+
+        500.051,25 msec cpu-clock                        #    1,998 CPUs utilized             
+        500.052,90 msec task-clock                       #    1,998 CPUs utilized             
+             4.284      context-switches                 #    8,567 /sec                      
+               109      cpu-migrations                   #    0,218 /sec                      
+           366.633      page-faults                      #  733,190 /sec                      
+    70.011.833.976      branches                         #  140,009 M/sec                     
+        18.195.602      branch-misses                    #    0,03% of all branches           
+    16.350.875.274      cache-references                 #   32,698 M/sec                     
+     4.072.091.438      cache-misses                     #   24,904 % of all cache refs       
+ 1.654.042.342.509      cycles                           #    3,308 GHz                       
+ 6.330.050.905.325      instructions                     #    3,83  insn per cycle            
+
+     250,236152370 seconds time elapsed
+
+     499,621331000 seconds user
+       0,430896000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para large e com 2 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 249.653657 sec
+
+ Performance counter stats for 'mpirun -np 2 ../syr2k_paralelo_mpi -d large':
+
+        500.160,80 msec cpu-clock                        #    1,998 CPUs utilized             
+        500.162,19 msec task-clock                       #    1,998 CPUs utilized             
+             3.995      context-switches                 #    7,987 /sec                      
+                81      cpu-migrations                   #    0,162 /sec                      
+           366.645      page-faults                      #  733,053 /sec                      
+    69.906.301.901      branches                         #  139,767 M/sec                     
+        18.189.074      branch-misses                    #    0,03% of all branches           
+    16.345.853.922      cache-references                 #   32,681 M/sec                     
+     4.071.671.005      cache-misses                     #   24,910 % of all cache refs       
+ 1.654.096.859.479      cycles                           #    3,307 GHz                       
+ 6.329.557.539.498      instructions                     #    3,83  insn per cycle            
+
+     250,289259040 seconds time elapsed
+
+     499,639631000 seconds user
+       0,522442000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para large e com 2 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+Tempo mpi: 249.584454 sec
+
+ Performance counter stats for 'mpirun -np 2 ../syr2k_paralelo_mpi -d large':
+
+        499.996,87 msec cpu-clock                        #    1,998 CPUs utilized             
+        499.998,37 msec task-clock                       #    1,998 CPUs utilized             
+             4.450      context-switches                 #    8,900 /sec                      
+                97      cpu-migrations                   #    0,194 /sec                      
+           366.636      page-faults                      #  733,275 /sec                      
+    70.038.953.066      branches                         #  140,079 M/sec                     
+        18.203.205      branch-misses                    #    0,03% of all branches           
+    16.349.061.615      cache-references                 #   32,698 M/sec                     
+     4.071.048.704      cache-misses                     #   24,901 % of all cache refs       
+ 1.654.292.515.125      cycles                           #    3,309 GHz                       
+ 6.330.178.837.933      instructions                     #    3,83  insn per cycle            
+
+     250,216482621 seconds time elapsed
+
+     499,461506000 seconds user
+       0,535997000 seconds sys
 
 
 ----------------------------------------

@@ -1,24 +1,120 @@
 Executando repetição 1 para medium e com 2 threads:
-Tempo paralelo: 24.700184 sec
+Tempo paralelo: 28.148177 sec
 
  Performance counter stats for '../syr2k_paralelo -d medium -t 2':
 
-         49.442,13 msec cpu-clock                        #    1,998 CPUs utilized             
-         49.442,67 msec task-clock                       #    1,998 CPUs utilized             
-               430      context-switches                 #    8,697 /sec                      
-                30      cpu-migrations                   #    0,607 /sec                      
-            24.687      page-faults                      #  499,308 /sec                      
-     8.649.844.534      branches                         #  174,948 M/sec                     
-         4.357.638      branch-misses                    #    0,05% of all branches           
-     2.145.108.498      cache-references                 #   43,386 M/sec                     
-       337.150.943      cache-misses                     #   15,717 % of all cache refs       
-   205.530.208.079      cycles                           #    4,157 GHz                       
-   859.629.735.891      instructions                     #    4,18  insn per cycle            
+         56.340,96 msec cpu-clock                        #    1,998 CPUs utilized             
+         56.341,10 msec task-clock                       #    1,998 CPUs utilized             
+               200      context-switches                 #    3,550 /sec                      
+                12      cpu-migrations                   #    0,213 /sec                      
+            24.685      page-faults                      #  438,135 /sec                      
+     8.649.940.502      branches                         #  153,528 M/sec                     
+         4.379.069      branch-misses                    #    0,05% of all branches           
+     2.161.812.562      cache-references                 #   38,370 M/sec                     
+       280.026.086      cache-misses                     #   12,953 % of all cache refs       
+   204.988.745.775      cycles                           #    3,638 GHz                       
+   859.631.215.071      instructions                     #    4,19  insn per cycle            
 
-      24,748055762 seconds time elapsed
+      28,195155488 seconds time elapsed
 
-      49,410130000 seconds user
-       0,031996000 seconds sys
+      56,316948000 seconds user
+       0,023998000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para medium e com 2 threads:
+Tempo paralelo: 28.225585 sec
+
+ Performance counter stats for '../syr2k_paralelo -d medium -t 2':
+
+         56.494,65 msec cpu-clock                        #    1,998 CPUs utilized             
+         56.494,76 msec task-clock                       #    1,998 CPUs utilized             
+               179      context-switches                 #    3,168 /sec                      
+                10      cpu-migrations                   #    0,177 /sec                      
+            24.684      page-faults                      #  436,926 /sec                      
+     8.649.832.383      branches                         #  153,109 M/sec                     
+         4.368.800      branch-misses                    #    0,05% of all branches           
+     2.164.070.986      cache-references                 #   38,306 M/sec                     
+       276.116.101      cache-misses                     #   12,759 % of all cache refs       
+   205.000.080.027      cycles                           #    3,629 GHz                       
+   859.630.605.438      instructions                     #    4,19  insn per cycle            
+
+      28,271240003 seconds time elapsed
+
+      56,478657000 seconds user
+       0,015999000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para medium e com 2 threads:
+Tempo paralelo: 28.541883 sec
+
+ Performance counter stats for '../syr2k_paralelo -d medium -t 2':
+
+         57.094,05 msec cpu-clock                        #    1,997 CPUs utilized             
+         57.094,23 msec task-clock                       #    1,997 CPUs utilized             
+               295      context-switches                 #    5,167 /sec                      
+                11      cpu-migrations                   #    0,193 /sec                      
+            24.683      page-faults                      #  432,321 /sec                      
+     8.650.200.343      branches                         #  151,508 M/sec                     
+         4.431.996      branch-misses                    #    0,05% of all branches           
+     2.096.915.574      cache-references                 #   36,727 M/sec                     
+       416.717.641      cache-misses                     #   19,873 % of all cache refs       
+   205.347.179.168      cycles                           #    3,597 GHz                       
+   859.632.737.608      instructions                     #    4,19  insn per cycle            
+
+      28,587396303 seconds time elapsed
+
+      57,078024000 seconds user
+       0,015998000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para medium e com 2 threads:
+Tempo paralelo: 28.203213 sec
+
+ Performance counter stats for '../syr2k_paralelo -d medium -t 2':
+
+         56.449,54 msec cpu-clock                        #    1,998 CPUs utilized             
+         56.449,67 msec task-clock                       #    1,998 CPUs utilized             
+               209      context-switches                 #    3,702 /sec                      
+                13      cpu-migrations                   #    0,230 /sec                      
+            24.683      page-faults                      #  437,257 /sec                      
+     8.649.884.760      branches                         #  153,232 M/sec                     
+         4.394.643      branch-misses                    #    0,05% of all branches           
+     2.140.105.843      cache-references                 #   37,912 M/sec                     
+       276.612.177      cache-misses                     #   12,925 % of all cache refs       
+   204.971.799.830      cycles                           #    3,631 GHz                       
+   859.630.822.159      instructions                     #    4,19  insn per cycle            
+
+      28,248689521 seconds time elapsed
+
+      56,445469000 seconds user
+       0,004000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para medium e com 2 threads:
+Tempo paralelo: 28.223222 sec
+
+ Performance counter stats for '../syr2k_paralelo -d medium -t 2':
+
+         56.489,78 msec cpu-clock                        #    1,998 CPUs utilized             
+         56.489,91 msec task-clock                       #    1,998 CPUs utilized             
+               202      context-switches                 #    3,576 /sec                      
+                 4      cpu-migrations                   #    0,071 /sec                      
+            24.687      page-faults                      #  437,017 /sec                      
+     8.649.927.853      branches                         #  153,124 M/sec                     
+         4.342.075      branch-misses                    #    0,05% of all branches           
+     2.142.236.503      cache-references                 #   37,923 M/sec                     
+       276.078.579      cache-misses                     #   12,887 % of all cache refs       
+   204.948.449.105      cycles                           #    3,628 GHz                       
+   859.631.088.624      instructions                     #    4,19  insn per cycle            
+
+      28,269124446 seconds time elapsed
+
+      56,469950000 seconds user
+       0,019997000 seconds sys
 
 
 ----------------------------------------
