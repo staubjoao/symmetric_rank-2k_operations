@@ -8,7 +8,6 @@
 struct arguments
 {
     char *size;
-    int num_threads;
     int debug;
 };
 
@@ -69,7 +68,6 @@ int main(int argc, char **argv)
     {
         struct arguments arguments;
         arguments.size = NULL;
-        arguments.num_threads = 0;
         arguments.debug = 0;
 
         argp_parse(&argp, argc, argv, 0, 0, &arguments);

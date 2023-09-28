@@ -164,7 +164,7 @@ int main(int argc, char **argv)
     {
         if (strcmp(arguments.size, "small") == 0)
             // tamanho_matriz = 3200;
-            tamanho_matriz = 1024;
+            tamanho_matriz = 16;
         else if (strcmp(arguments.size, "medium") == 0)
             tamanho_matriz = 2048;
         else if (strcmp(arguments.size, "large") == 0)

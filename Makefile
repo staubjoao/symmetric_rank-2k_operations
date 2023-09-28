@@ -18,5 +18,5 @@ syr2k_paralelo_mpi:
 syr2k_pthreads_mpi:
 	$(MPI) $(MPIFLAGS) -o syr2k_pthreads_mpi $(PATH_SRC)syr2k_pthreads_mpi.c
 
-clean:
+clear:
 	rm -f syr2k syr2k_paralelo syr2k_paralelo_mpi syr2k_pthreads_mpi

@@ -16,6 +16,7 @@ struct arguments
 
 static struct argp_option options[] = {
     {"size", 'd', "SIZE", 0, "Specify matrix size (small, medium or large)"},
+    {"threads", 't', "NUM", 0, "Specify number of threads"},
     {"debug", 'D', 0, 0, "Print debug information"},
     {"help", 'h', 0, 0, "Print this help message"},
     {0}};
@@ -28,6 +29,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
     {
     case 'd':
         arguments->size = arg;
+        break;
+    case 't':
+        arguments->num_threads = atoi(arg);
         break;
     case 'D':
         arguments->debug = 1;
@@ -45,7 +49,6 @@ static struct argp argp = {options, parse_opt, NULL, NULL};
 
 void verificar_erro(int teste_local, char fname[], char mensagem[], MPI_Comm comm);
 void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n, int n_local, MPI_Comm comm);
-void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
 void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, int debug, MPI_Comm comm);
 void kernel_syr2k_mpi_aux(int n_local, int rank, MPI_Comm comm);
@@ -67,10 +70,11 @@ void *kernel_syr2k_trabalhador(void *arg)
     int passolocal = passo;
     int i, j, k;
 
-    printf("T %d rodando de %d até %d\n", id_thread, inicio, inicio + passolocal);
-
     if (id_thread == n_threads - 1)
+    {
         passolocal += resto;
+        printf("threads %d, de %d até %d\n", id_thread, inicio, inicio + passolocal);
+    }
 
     for (i = inicio; i < inicio + passolocal; i++)
         for (j = 0; j < n; j++)
@@ -121,7 +125,7 @@ int main(int argc, char **argv)
         {
             if (strcmp(arguments.size, "small") == 0)
                 // n = 3200;
-                n = 16;
+                n = 1024;
             else if (strcmp(arguments.size, "medium") == 0)
                 // n = 4432;
                 n = 2048;
@@ -131,7 +135,7 @@ int main(int argc, char **argv)
         }
         debug = arguments.debug;
 
-        n_threads = 2;
+        n_threads = arguments.num_threads;
     }
 
     MPI_Bcast(&n, 1, MPI_INT, root, MPI_COMM_WORLD);
@@ -198,43 +202,6 @@ void alocar_matrizes(
         C_local == NULL)
         teste_local = 0;
     verificar_erro(teste_local, "alocar_matrizes", "Não foi possivel alocar as matrizes", comm);
-}
-
-void imprimir_matriz_debug(
-    char titulo[] /* entrada */,
-    double matriz_local[] /* entrada */,
-    int n /* entrada */,
-    int n_local /* entrada */,
-    int rank /* entrada */,
-    MPI_Comm comm /* entrada */)
-{
-    double *matriz = NULL;
-    int i, j, teste_local = 1;
-
-    if (rank == 0)
-    {
-        matriz = malloc(n * n * sizeof(double));
-        if (matriz == NULL)
-            teste_local = 0;
-        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
-        MPI_Gather(matriz_local, n_local * n, MPI_DOUBLE,
-                   matriz, n_local * n, MPI_DOUBLE, 0, comm);
-        printf("\nThe matrix %s\n", titulo);
-        for (i = 0; i < n; i++)
-        {
-            for (j = 0; j < n; j++)
-                printf("%0.2lf ", matriz[i * n + j]);
-            printf("\n");
-        }
-        printf("\n");
-        free(matriz);
-    }
-    else
-    {
-        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
-        MPI_Gather(matriz_local, n_local * n, MPI_DOUBLE,
-                   matriz, n_local * n, MPI_DOUBLE, 0, comm);
-    }
 }
 
 void inicia_matrizes(
@@ -308,17 +275,25 @@ void imprimir_matriz_resultante(
 
         if (debug)
         {
+            // for (i = 0; i < n; i++)
+            //     for (j = 0; j < n; j++)
+            //     {
+            //         fprintf(stderr, "%0.2lf ", C[i * n + j]);
+            //         if ((i * n + j) % 20 == 0)
+            //             fprintf(stderr, "\n");
+            //     }
+            // fprintf(stderr, "\n");
 
             for (i = 0; i < n; i++)
+            {
+                fprintf(stderr, "%d ", i);
                 for (j = 0; j < n; j++)
                 {
                     fprintf(stderr, "%0.2lf ", C[i * n + j]);
-                    if ((i * n + j) % 20 == 0)
-                        fprintf(stderr, "\n");
                 }
-            fprintf(stderr, "\n");
+                fprintf(stderr, "\n");
+            }
         }
-        fprintf(stderr, "\nteste\n");
         free(C);
     }
     else
@@ -333,8 +308,6 @@ void kernel_syr2k_mpi_aux(
     int rank, /* entrada */
     MPI_Comm comm /* entrada  */)
 {
-
-    printf("rank: %d - n_local: %d\n", rank, n_local);
     int teste_local = 1;
     int i, j, k;
 
@@ -347,20 +320,15 @@ void kernel_syr2k_mpi_aux(
     MPI_Allgather(A_local, n_local * n, MPI_DOUBLE, A, n_local * n, MPI_DOUBLE, comm);
     MPI_Allgather(B_local, n_local * n, MPI_DOUBLE, B, n_local * n, MPI_DOUBLE, comm);
 
+    inicio_aux = 0;
+
     passo = (n_local / (n_threads + 1));
     resto = (n_local % (n_threads + 1));
 
-    printf("teste: passo: %d resto: %d\n", passo, resto);
+    printf("resto: %d\n", resto);
+
     pthread_t threads[n_threads];
     int id_thread[n_threads];
-
-    for (i = 0; i < passo; i++)
-        for (j = 0; j < n; j++)
-            for (k = 0; k < n; k++)
-            {
-                C_local[i * n + j] += alpha * A_local[i * n + k] * B[j * n + k];
-                C_local[i * n + j] += alpha * B_local[i * n + k] * A[j * n + k];
-            }
 
     inicio_aux = passo;
 
@@ -372,7 +340,23 @@ void kernel_syr2k_mpi_aux(
         pthread_create(&threads[t], NULL, kernel_syr2k_trabalhador, (void *)&id_thread[t]);
     }
 
-    // colocar a exec aqui
+    // MPI executa um passo do trabalho junto com as threads do pthreads
+    for (i = 0; i < passo; i++)
+        for (j = 0; j < n; j++)
+            C_local[i * n + j] *= beta;
+    MPI_Barrier(comm);
+
+    for (i = 0; i < passo; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            for (k = 0; k < n; k++)
+            {
+                C_local[i * n + j] += alpha * A_local[i * n + k] * B[j * n + k];
+                C_local[i * n + j] += alpha * B_local[i * n + k] * A[j * n + k];
+            }
+        }
+    }
 
     for (int t = 0; t < n_threads; ++t)
         pthread_join(threads[t], NULL);

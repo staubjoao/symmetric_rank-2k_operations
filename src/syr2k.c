@@ -119,14 +119,23 @@ void print_array(int ni)
 {
     int i, j;
 
+    // for (i = 0; i < ni; i++)
+    //     for (j = 0; j < ni; j++)
+    //     {
+    //         fprintf(stderr, "%0.2lf ", C[i][j]);
+    //         if ((i * ni + j) % 20 == 0)
+    //             fprintf(stderr, "\n");
+    //     }
+    // fprintf(stderr, "\n");
     for (i = 0; i < ni; i++)
+    {
+        fprintf(stderr, "%d ", i);
         for (j = 0; j < ni; j++)
         {
             fprintf(stderr, "%0.2lf ", C[i][j]);
-            if ((i * ni + j) % 20 == 0)
-                fprintf(stderr, "\n");
         }
-    fprintf(stderr, "\n");
+        fprintf(stderr, "\n");
+    }
 }
 
 int main(int argc, char **argv)
