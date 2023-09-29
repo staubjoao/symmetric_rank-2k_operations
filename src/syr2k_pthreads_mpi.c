@@ -71,10 +71,7 @@ void *kernel_syr2k_trabalhador(void *arg)
     int i, j, k;
 
     if (id_thread == n_threads - 1)
-    {
         passolocal += resto;
-        printf("threads %d, de %d até %d\n", id_thread, inicio, inicio + passolocal);
-    }
 
     for (i = inicio; i < inicio + passolocal; i++)
         for (j = 0; j < n; j++)
@@ -271,28 +268,16 @@ void imprimir_matriz_resultante(
         verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
         MPI_Gather(C_local, n_local * n, MPI_DOUBLE, C, n_local * n, MPI_DOUBLE, 0, comm);
 
-        printf("Tempo mpi: %lf sec\n", end - start);
-
         if (debug)
         {
-            // for (i = 0; i < n; i++)
-            //     for (j = 0; j < n; j++)
-            //     {
-            //         fprintf(stderr, "%0.2lf ", C[i * n + j]);
-            //         if ((i * n + j) % 20 == 0)
-            //             fprintf(stderr, "\n");
-            //     }
-            // fprintf(stderr, "\n");
-
             for (i = 0; i < n; i++)
-            {
-                fprintf(stderr, "%d ", i);
                 for (j = 0; j < n; j++)
                 {
                     fprintf(stderr, "%0.2lf ", C[i * n + j]);
+                    if ((i * n + j) % 20 == 0)
+                        fprintf(stderr, "\n");
                 }
-                fprintf(stderr, "\n");
-            }
+            fprintf(stderr, "\n");
         }
         free(C);
     }
@@ -324,8 +309,6 @@ void kernel_syr2k_mpi_aux(
 
     passo = (n_local / (n_threads + 1));
     resto = (n_local % (n_threads + 1));
-
-    printf("resto: %d\n", resto);
 
     pthread_t threads[n_threads];
     int id_thread[n_threads];

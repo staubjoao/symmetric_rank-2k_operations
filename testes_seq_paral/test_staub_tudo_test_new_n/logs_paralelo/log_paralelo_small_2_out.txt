@@ -1,0 +1,24 @@
+Executando repetição 1 para small e com 2 threads:
+Tempo paralelo: 3.061094 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d small -t 2':
+
+          6.133,11 msec cpu-clock                        #    1,996 CPUs utilized             
+          6.133,15 msec task-clock                       #    1,996 CPUs utilized             
+                16      context-switches                 #    2,609 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+             6.238      page-faults                      #    1,017 K/sec                     
+     1.087.541.292      branches                         #  177,322 M/sec                     
+         1.077.316      branch-misses                    #    0,10% of all branches           
+       270.142.666      cache-references                 #   44,046 M/sec                     
+        35.507.150      cache-misses                     #   13,144 % of all cache refs       
+    25.591.537.269      cycles                           #    4,173 GHz                       
+   107.525.848.706      instructions                     #    4,20  insn per cycle            
+
+       3,073429108 seconds time elapsed
+
+       6,125664000 seconds user
+       0,007996000 seconds sys
+
+
+----------------------------------------

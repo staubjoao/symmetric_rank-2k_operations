@@ -1,0 +1,24 @@
+Executando repetição 1 para large:
+Tempo sequencial: 395.009428 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d large':
+
+        395.164,38 msec cpu-clock                        #    1,000 CPUs utilized             
+        395.164,33 msec task-clock                       #    1,000 CPUs utilized             
+             2.238      context-switches                 #    5,663 /sec                      
+                31      cpu-migrations                   #    0,078 /sec                      
+            98.440      page-faults                      #  249,112 /sec                      
+    68.994.338.516      branches                         #  174,597 M/sec                     
+        17.247.809      branch-misses                    #    0,02% of all branches           
+    16.501.984.297      cache-references                 #   41,760 M/sec                     
+     3.985.147.093      cache-misses                     #   24,150 % of all cache refs       
+ 1.655.050.191.152      cycles                           #    4,188 GHz                       
+ 6.874.704.246.778      instructions                     #    4,15  insn per cycle            
+
+     395,194071767 seconds time elapsed
+
+     395,057332000 seconds user
+       0,103990000 seconds sys
+
+
+----------------------------------------

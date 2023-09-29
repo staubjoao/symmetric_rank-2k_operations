@@ -1,0 +1,24 @@
+Executando repetição 1 para small:
+Tempo sequencial: 6.160180 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d small':
+
+          6.171,79 msec cpu-clock                        #    1,000 CPUs utilized             
+          6.171,81 msec task-clock                       #    1,000 CPUs utilized             
+                25      context-switches                 #    4,051 /sec                      
+                 1      cpu-migrations                   #    0,162 /sec                      
+             6.228      page-faults                      #    1,009 K/sec                     
+     1.087.606.786      branches                         #  176,222 M/sec                     
+         1.075.430      branch-misses                    #    0,10% of all branches           
+       251.588.948      cache-references                 #   40,764 M/sec                     
+        41.758.863      cache-misses                     #   16,598 % of all cache refs       
+    25.845.658.843      cycles                           #    4,188 GHz                       
+   107.525.220.378      instructions                     #    4,16  insn per cycle            
+
+       6,172511184 seconds time elapsed
+
+       6,164080000 seconds user
+       0,008000000 seconds sys
+
+
+----------------------------------------

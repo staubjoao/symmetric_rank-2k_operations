@@ -1,0 +1,24 @@
+Executando repetição 1 para medium:
+Tempo sequencial: 49.348008 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d medium':
+
+         49.392,17 msec cpu-clock                        #    1,000 CPUs utilized             
+         49.392,23 msec task-clock                       #    1,000 CPUs utilized             
+               328      context-switches                 #    6,641 /sec                      
+                27      cpu-migrations                   #    0,547 /sec                      
+            24.677      page-faults                      #  499,613 /sec                      
+     8.649.171.178      branches                         #  175,112 M/sec                     
+         4.285.230      branch-misses                    #    0,05% of all branches           
+     2.115.821.616      cache-references                 #   42,837 M/sec                     
+       470.060.505      cache-misses                     #   22,216 % of all cache refs       
+   206.888.884.420      cycles                           #    4,189 GHz                       
+   859.622.968.935      instructions                     #    4,15  insn per cycle            
+
+      49,395696244 seconds time elapsed
+
+      49,363795000 seconds user
+       0,027997000 seconds sys
+
+
+----------------------------------------

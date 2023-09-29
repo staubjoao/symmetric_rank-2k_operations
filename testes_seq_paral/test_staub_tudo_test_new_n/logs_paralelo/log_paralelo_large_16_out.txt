@@ -1,0 +1,24 @@
+Executando repetição 1 para large e com 16 threads:
+Tempo paralelo: 149.858113 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d large -t 16':
+
+      1.193.147,80 msec cpu-clock                        #    7,952 CPUs utilized             
+      1.193.156,78 msec task-clock                       #    7,952 CPUs utilized             
+            80.448      context-switches                 #   67,425 /sec                      
+               350      cpu-migrations                   #    0,293 /sec                      
+            98.477      page-faults                      #   82,535 /sec                      
+    69.185.420.620      branches                         #   57,985 M/sec                     
+        19.306.003      branch-misses                    #    0,03% of all branches           
+    16.967.943.997      cache-references                 #   14,221 M/sec                     
+     4.438.849.695      cache-misses                     #   26,160 % of all cache refs       
+ 3.242.402.314.072      cycles                           #    2,718 GHz                       
+ 6.875.871.784.086      instructions                     #    2,12  insn per cycle            
+
+     150,040980621 seconds time elapsed
+
+    1192,999351000 seconds user
+       0,127990000 seconds sys
+
+
+----------------------------------------

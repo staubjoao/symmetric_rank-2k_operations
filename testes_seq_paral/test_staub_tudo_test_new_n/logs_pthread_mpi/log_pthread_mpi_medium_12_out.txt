@@ -1,0 +1,38 @@
+Executando repetição 1 para medium e com 5 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+
+ Performance counter stats for 'mpirun -np 5 ../syr2k_pthreads_mpi.o -d medium':
+
+        157.510,90 msec cpu-clock                        #    4,960 CPUs utilized             
+        157.511,65 msec task-clock                       #    4,960 CPUs utilized             
+             6.470      context-switches                 #   41,076 /sec                      
+               157      cpu-migrations                   #    0,997 /sec                      
+           163.700      page-faults                      #    1,039 K/sec                     
+    62.988.879.277      branches                         #  399,901 M/sec                     
+         6.147.124      branch-misses                    #    0,01% of all branches           
+     2.091.292.140      cache-references                 #   13,277 M/sec                     
+       540.950.695      cache-misses                     #   25,867 % of all cache refs       
+   402.246.892.917      cycles                           #    2,554 GHz                       
+ 1.044.200.402.511      instructions                     #    2,60  insn per cycle            
+
+      31,755549612 seconds time elapsed
+
+     156,581310000 seconds user
+       0,932079000 seconds sys
+
+
+----------------------------------------

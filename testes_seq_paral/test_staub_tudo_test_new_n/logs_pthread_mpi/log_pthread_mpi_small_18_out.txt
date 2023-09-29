@@ -1,0 +1,47 @@
+Executando repetição 1 para small e com 8 threads:
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+hwloc/linux: Ignoring PCI device with non-16bit domain.
+Pass --enable-32bits-pci-domain to configure to support such devices
+(warning: it would break the library ABI, don't enable unless really needed).
+
+ Performance counter stats for 'mpirun -np 8 ../syr2k_pthreads_mpi.o -d small':
+
+         23.120,39 msec cpu-clock                        #    7,283 CPUs utilized             
+         23.121,25 msec task-clock                       #    7,283 CPUs utilized             
+             9.969      context-switches                 #  431,170 /sec                      
+               131      cpu-migrations                   #    5,666 /sec                      
+            72.761      page-faults                      #    3,147 K/sec                     
+     1.744.668.430      branches                         #   75,459 M/sec                     
+         3.583.331      branch-misses                    #    0,21% of all branches           
+       281.297.852      cache-references                 #   12,166 M/sec                     
+        79.186.516      cache-misses                     #   28,150 % of all cache refs       
+    56.749.325.108      cycles                           #    2,454 GHz                       
+   102.087.105.113      instructions                     #    1,80  insn per cycle            
+
+       3,174561633 seconds time elapsed
+
+      21,579340000 seconds user
+       1,543292000 seconds sys
+
+
+----------------------------------------
