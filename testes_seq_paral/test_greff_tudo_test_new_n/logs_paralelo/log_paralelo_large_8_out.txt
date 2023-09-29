@@ -1,0 +1,120 @@
+Executando repetição 1 para large e com 8 threads:
+Tempo paralelo: 135.134209 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d large -t 8':
+
+      1.077.932,97 msec cpu-clock                        #    7,964 CPUs utilized             
+      1.077.938,16 msec task-clock                       #    7,964 CPUs utilized             
+             2.327      context-switches                 #    2,159 /sec                      
+               317      cpu-migrations                   #    0,294 /sec                      
+            98.462      page-faults                      #   91,343 /sec                      
+    69.442.030.312      branches                         #   64,421 M/sec                       (83,34%)
+        28.588.075      branch-misses                    #    0,04% of all branches             (83,33%)
+    56.707.948.016      cache-references                 #   52,608 M/sec                       (83,33%)
+       651.039.740      cache-misses                     #    1,148 % of all cache refs         (83,33%)
+ 1.861.410.501.451      cycles                           #    1,727 GHz                         (83,33%)
+ 6.898.313.776.047      instructions                     #    3,71  insn per cycle              (83,33%)
+
+     135,356194284 seconds time elapsed
+
+    1077,764310000 seconds user
+       0,140000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para large e com 8 threads:
+Tempo paralelo: 133.910360 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d large -t 8':
+
+      1.067.797,14 msec cpu-clock                        #    7,961 CPUs utilized             
+      1.067.803,85 msec task-clock                       #    7,961 CPUs utilized             
+             2.953      context-switches                 #    2,765 /sec                      
+               356      cpu-migrations                   #    0,333 /sec                      
+            98.460      page-faults                      #   92,208 /sec                      
+    69.165.037.988      branches                         #   64,773 M/sec                       (83,33%)
+        28.684.267      branch-misses                    #    0,04% of all branches             (83,34%)
+    57.204.267.834      cache-references                 #   53,572 M/sec                       (83,34%)
+       653.606.869      cache-misses                     #    1,143 % of all cache refs         (83,33%)
+ 1.846.216.652.057      cycles                           #    1,729 GHz                         (83,33%)
+ 6.807.029.811.745      instructions                     #    3,69  insn per cycle              (83,33%)
+
+     134,129371443 seconds time elapsed
+
+    1067,584983000 seconds user
+       0,172002000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para large e com 8 threads:
+Tempo paralelo: 134.003009 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d large -t 8':
+
+      1.068.641,34 msec cpu-clock                        #    7,962 CPUs utilized             
+      1.068.647,68 msec task-clock                       #    7,962 CPUs utilized             
+             2.822      context-switches                 #    2,641 /sec                      
+               335      cpu-migrations                   #    0,313 /sec                      
+            98.460      page-faults                      #   92,135 /sec                      
+    68.614.655.577      branches                         #   64,207 M/sec                       (83,33%)
+        28.325.778      branch-misses                    #    0,04% of all branches             (83,33%)
+    56.947.233.116      cache-references                 #   53,289 M/sec                       (83,33%)
+       654.272.202      cache-misses                     #    1,149 % of all cache refs         (83,34%)
+ 1.871.988.792.786      cycles                           #    1,752 GHz                         (83,34%)
+ 6.847.810.005.858      instructions                     #    3,66  insn per cycle              (83,34%)
+
+     134,222687005 seconds time elapsed
+
+    1068,426985000 seconds user
+       0,176002000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para large e com 8 threads:
+Tempo paralelo: 133.913329 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d large -t 8':
+
+      1.067.958,61 msec cpu-clock                        #    7,962 CPUs utilized             
+      1.067.965,81 msec task-clock                       #    7,962 CPUs utilized             
+             3.256      context-switches                 #    3,049 /sec                      
+               374      cpu-migrations                   #    0,350 /sec                      
+            98.461      page-faults                      #   92,195 /sec                      
+    69.089.835.358      branches                         #   64,693 M/sec                       (83,33%)
+        28.516.318      branch-misses                    #    0,04% of all branches             (83,33%)
+    56.903.793.149      cache-references                 #   53,283 M/sec                       (83,33%)
+       655.407.755      cache-misses                     #    1,152 % of all cache refs         (83,34%)
+ 1.863.701.115.816      cycles                           #    1,745 GHz                         (83,33%)
+ 6.867.585.726.447      instructions                     #    3,68  insn per cycle              (83,34%)
+
+     134,132638335 seconds time elapsed
+
+    1067,690072000 seconds user
+       0,224012000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para large e com 8 threads:
+Tempo paralelo: 134.029476 sec
+
+ Performance counter stats for '../syr2k_pthread.o -d large -t 8':
+
+      1.068.863,75 msec cpu-clock                        #    7,962 CPUs utilized             
+      1.068.869,71 msec task-clock                       #    7,962 CPUs utilized             
+             2.771      context-switches                 #    2,592 /sec                      
+               299      cpu-migrations                   #    0,280 /sec                      
+            98.460      page-faults                      #   92,116 /sec                      
+    69.310.327.120      branches                         #   64,845 M/sec                       (83,34%)
+        27.898.536      branch-misses                    #    0,04% of all branches             (83,33%)
+    56.980.582.316      cache-references                 #   53,309 M/sec                       (83,33%)
+       654.894.054      cache-misses                     #    1,149 % of all cache refs         (83,34%)
+ 1.850.679.058.822      cycles                           #    1,731 GHz                         (83,33%)
+ 6.887.481.047.635      instructions                     #    3,72  insn per cycle              (83,33%)
+
+     134,247080327 seconds time elapsed
+
+    1068,629529000 seconds user
+       0,196003000 seconds sys
+
+
+----------------------------------------

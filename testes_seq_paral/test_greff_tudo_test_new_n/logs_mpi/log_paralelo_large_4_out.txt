@@ -1,0 +1,120 @@
+Executando repetição 1 para large e com 4 threads:
+Tempo mpi: 130.310465 sec
+
+ Performance counter stats for 'mpirun -np 4 ../syr2k_mpi.o -d large':
+
+        523.150,40 msec cpu-clock                        #    3,992 CPUs utilized             
+        523.154,30 msec task-clock                       #    3,992 CPUs utilized             
+             7.817      context-switches                 #   14,942 /sec                      
+               677      cpu-migrations                   #    1,294 /sec                      
+           560.626      page-faults                      #    1,072 K/sec                     
+    70.777.478.659      branches                         #  135,290 M/sec                       (83,33%)
+        38.832.950      branch-misses                    #    0,05% of all branches             (83,33%)
+    92.335.788.099      cache-references                 #  176,499 M/sec                       (83,33%)
+       604.291.811      cache-misses                     #    0,654 % of all cache refs         (83,33%)
+ 1.946.070.024.085      cycles                           #    3,720 GHz                         (83,34%)
+ 6.333.486.439.897      instructions                     #    3,25  insn per cycle              (83,33%)
+
+     131,061488425 seconds time elapsed
+
+     519,317385000 seconds user
+       3,816495000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para large e com 4 threads:
+Tempo mpi: 128.887705 sec
+
+ Performance counter stats for 'mpirun -np 4 ../syr2k_mpi.o -d large':
+
+        518.908,57 msec cpu-clock                        #    3,992 CPUs utilized             
+        518.911,63 msec task-clock                       #    3,992 CPUs utilized             
+             7.050      context-switches                 #   13,586 /sec                      
+               629      cpu-migrations                   #    1,212 /sec                      
+           560.677      page-faults                      #    1,080 K/sec                     
+    70.601.984.205      branches                         #  136,058 M/sec                       (83,33%)
+        35.047.413      branch-misses                    #    0,05% of all branches             (83,33%)
+    92.794.679.689      cache-references                 #  178,826 M/sec                       (83,33%)
+       600.487.502      cache-misses                     #    0,647 % of all cache refs         (83,33%)
+ 1.940.269.343.686      cycles                           #    3,739 GHz                         (83,34%)
+ 6.332.725.340.163      instructions                     #    3,26  insn per cycle              (83,34%)
+
+     129,986762142 seconds time elapsed
+
+     515,681626000 seconds user
+       3,214668000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para large e com 4 threads:
+Tempo mpi: 130.495102 sec
+
+ Performance counter stats for 'mpirun -np 4 ../syr2k_mpi.o -d large':
+
+        525.786,82 msec cpu-clock                        #    3,993 CPUs utilized             
+        525.788,07 msec task-clock                       #    3,993 CPUs utilized             
+             5.220      context-switches                 #    9,928 /sec                      
+               597      cpu-migrations                   #    1,135 /sec                      
+           560.657      page-faults                      #    1,066 K/sec                     
+    70.579.843.336      branches                         #  134,236 M/sec                       (83,33%)
+        34.929.002      branch-misses                    #    0,05% of all branches             (83,33%)
+    92.814.423.770      cache-references                 #  176,525 M/sec                       (83,34%)
+       606.074.209      cache-misses                     #    0,653 % of all cache refs         (83,33%)
+ 1.939.971.808.994      cycles                           #    3,690 GHz                         (83,34%)
+ 6.332.594.220.384      instructions                     #    3,26  insn per cycle              (83,33%)
+
+     131,673975589 seconds time elapsed
+
+     522,744547000 seconds user
+       3,049610000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para large e com 4 threads:
+Tempo mpi: 131.863608 sec
+
+ Performance counter stats for 'mpirun -np 4 ../syr2k_mpi.o -d large':
+
+        529.435,64 msec cpu-clock                        #    3,993 CPUs utilized             
+        529.438,48 msec task-clock                       #    3,993 CPUs utilized             
+             6.854      context-switches                 #   12,946 /sec                      
+               586      cpu-migrations                   #    1,107 /sec                      
+           560.679      page-faults                      #    1,059 K/sec                     
+    70.440.644.117      branches                         #  133,048 M/sec                       (83,33%)
+        32.476.225      branch-misses                    #    0,05% of all branches             (83,33%)
+    92.829.467.871      cache-references                 #  175,336 M/sec                       (83,33%)
+       600.206.411      cache-misses                     #    0,647 % of all cache refs         (83,34%)
+ 1.934.579.328.015      cycles                           #    3,654 GHz                         (83,34%)
+ 6.332.004.381.596      instructions                     #    3,27  insn per cycle              (83,33%)
+
+     132,607295278 seconds time elapsed
+
+     527,155116000 seconds user
+       2,265429000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para large e com 4 threads:
+Tempo mpi: 131.816838 sec
+
+ Performance counter stats for 'mpirun -np 4 ../syr2k_mpi.o -d large':
+
+        530.237,98 msec cpu-clock                        #    3,993 CPUs utilized             
+        530.240,55 msec task-clock                       #    3,993 CPUs utilized             
+             6.258      context-switches                 #   11,802 /sec                      
+               596      cpu-migrations                   #    1,124 /sec                      
+           560.715      page-faults                      #    1,057 K/sec                     
+    70.548.258.682      branches                         #  133,050 M/sec                       (83,33%)
+        35.014.122      branch-misses                    #    0,05% of all branches             (83,33%)
+    93.629.140.180      cache-references                 #  176,579 M/sec                       (83,33%)
+       603.759.720      cache-misses                     #    0,645 % of all cache refs         (83,34%)
+ 1.936.878.826.752      cycles                           #    3,653 GHz                         (83,34%)
+ 6.332.566.726.021      instructions                     #    3,27  insn per cycle              (83,33%)
+
+     132,805358165 seconds time elapsed
+
+     527,366364000 seconds user
+       2,869039000 seconds sys
+
+
+----------------------------------------

@@ -1,0 +1,120 @@
+Executando repetição 1 para medium:
+Tempo sequencial: 54.365837 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d medium':
+
+         54.313,40 msec cpu-clock                        #    0,998 CPUs utilized             
+         54.313,98 msec task-clock                       #    0,998 CPUs utilized             
+             1.898      context-switches                 #   34,945 /sec                      
+                32      cpu-migrations                   #    0,589 /sec                      
+            24.676      page-faults                      #  454,324 /sec                      
+     8.660.644.096      branches                         #  159,456 M/sec                       (83,32%)
+         4.900.942      branch-misses                    #    0,06% of all branches             (83,33%)
+     6.958.028.673      cache-references                 #  128,108 M/sec                       (83,35%)
+        67.762.692      cache-misses                     #    0,974 % of all cache refs         (83,34%)
+   233.682.038.435      cycles                           #    4,302 GHz                         (83,33%)
+   859.679.869.450      instructions                     #    3,68  insn per cycle              (83,34%)
+
+      54,424976678 seconds time elapsed
+
+      54,267551000 seconds user
+       0,027987000 seconds sys
+
+
+----------------------------------------
+Executando repetição 2 para medium:
+Tempo sequencial: 53.836155 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d medium':
+
+         53.891,40 msec cpu-clock                        #    1,000 CPUs utilized             
+         53.891,45 msec task-clock                       #    1,000 CPUs utilized             
+               210      context-switches                 #    3,897 /sec                      
+                29      cpu-migrations                   #    0,538 /sec                      
+            24.678      page-faults                      #  457,921 /sec                      
+     8.661.524.005      branches                         #  160,722 M/sec                       (83,33%)
+         4.768.556      branch-misses                    #    0,06% of all branches             (83,33%)
+     7.009.512.595      cache-references                 #  130,067 M/sec                       (83,33%)
+        64.321.316      cache-misses                     #    0,918 % of all cache refs         (83,34%)
+   233.031.879.569      cycles                           #    4,324 GHz                         (83,34%)
+   859.650.990.173      instructions                     #    3,69  insn per cycle              (83,33%)
+
+      53,894944655 seconds time elapsed
+
+      53,858566000 seconds user
+       0,031996000 seconds sys
+
+
+----------------------------------------
+Executando repetição 3 para medium:
+Tempo sequencial: 54.174990 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d medium':
+
+         54.228,13 msec cpu-clock                        #    1,000 CPUs utilized             
+         54.228,08 msec task-clock                       #    1,000 CPUs utilized             
+               410      context-switches                 #    7,561 /sec                      
+                 0      cpu-migrations                   #    0,000 /sec                      
+            24.677      page-faults                      #  455,059 /sec                      
+     8.661.749.993      branches                         #  159,728 M/sec                       (83,33%)
+         4.762.250      branch-misses                    #    0,05% of all branches             (83,33%)
+     7.016.299.740      cache-references                 #  129,385 M/sec                       (83,33%)
+        64.476.141      cache-misses                     #    0,919 % of all cache refs         (83,34%)
+   232.662.002.954      cycles                           #    4,290 GHz                         (83,34%)
+   859.689.074.791      instructions                     #    3,70  insn per cycle              (83,33%)
+
+      54,233658715 seconds time elapsed
+
+      54,193678000 seconds user
+       0,031996000 seconds sys
+
+
+----------------------------------------
+Executando repetição 4 para medium:
+Tempo sequencial: 54.381918 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d medium':
+
+         54.420,77 msec cpu-clock                        #    1,000 CPUs utilized             
+         54.420,90 msec task-clock                       #    1,000 CPUs utilized             
+               487      context-switches                 #    8,949 /sec                      
+                22      cpu-migrations                   #    0,404 /sec                      
+            24.677      page-faults                      #  453,448 /sec                      
+     8.659.943.423      branches                         #  159,129 M/sec                       (83,33%)
+         4.803.305      branch-misses                    #    0,06% of all branches             (83,33%)
+     6.982.453.729      cache-references                 #  128,305 M/sec                       (83,34%)
+        64.354.988      cache-misses                     #    0,922 % of all cache refs         (83,33%)
+   232.978.936.813      cycles                           #    4,281 GHz                         (83,34%)
+   859.755.390.635      instructions                     #    3,69  insn per cycle              (83,33%)
+
+      54,441257922 seconds time elapsed
+
+      54,384858000 seconds user
+       0,032000000 seconds sys
+
+
+----------------------------------------
+Executando repetição 5 para medium:
+Tempo sequencial: 53.832335 sec 0
+
+ Performance counter stats for '../syr2k_seq.o -d medium':
+
+         53.887,53 msec cpu-clock                        #    1,000 CPUs utilized             
+         53.887,60 msec task-clock                       #    1,000 CPUs utilized             
+               183      context-switches                 #    3,396 /sec                      
+                32      cpu-migrations                   #    0,594 /sec                      
+            24.677      page-faults                      #  457,935 /sec                      
+     8.661.055.064      branches                         #  160,725 M/sec                       (83,33%)
+         4.748.984      branch-misses                    #    0,05% of all branches             (83,33%)
+     7.023.744.113      cache-references                 #  130,341 M/sec                       (83,33%)
+        64.149.461      cache-misses                     #    0,913 % of all cache refs         (83,34%)
+   232.580.003.616      cycles                           #    4,316 GHz                         (83,34%)
+   859.694.184.757      instructions                     #    3,70  insn per cycle              (83,34%)
+
+      53,890773499 seconds time elapsed
+
+      53,854907000 seconds user
+       0,031996000 seconds sys
+
+
+----------------------------------------
