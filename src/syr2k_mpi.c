@@ -17,7 +17,10 @@ static struct argp_option options[] = {
     {"help", 'h', 0, 0, "Print this help message"},
     {0}};
 
-static error_t parse_opt(int key, char *arg, struct argp_state *state)
+static error_t parse_opt(
+    int key,   /* entrada */
+    char *arg, /* entrada */
+    struct argp_state *state /* saida */)
 {
     struct arguments *arguments = state->input;
 
@@ -42,7 +45,6 @@ static struct argp argp = {options, parse_opt, NULL, NULL};
 
 void verificar_erro(int teste_local, char fname[], char mensagem[], MPI_Comm comm);
 void alocar_matrizes(double **A_local, double **B_local, double **C_local, int n, int n_local, MPI_Comm comm);
-void imprimir_matriz_debug(char titulo[], double matriz_local[], int n, int n_local, int rank, MPI_Comm comm);
 void inicia_matrizes(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
 void imprimir_matriz_resultante(double C_local[], int n, int n_local, int rank, double start, double end, int debug, MPI_Comm comm);
 void kernel_syr2k(double A_local[], double B_local[], double C_local[], int n, int n_local, int rank, MPI_Comm comm);
@@ -81,13 +83,10 @@ int main(int argc, char **argv)
         if (arguments.size != NULL)
         {
             if (strcmp(arguments.size, "small") == 0)
-                // n = 3200;
                 n = 1024;
             else if (strcmp(arguments.size, "medium") == 0)
-                // n = 4432;
                 n = 2048;
             else if (strcmp(arguments.size, "large") == 0)
-                // n = 5664;
                 n = 4096;
         }
         debug = arguments.debug;
@@ -156,43 +155,6 @@ void alocar_matrizes(
         C_local == NULL)
         teste_local = 0;
     verificar_erro(teste_local, "alocar_matrizes", "Não foi possivel alocar as matrizes", comm);
-}
-
-void imprimir_matriz_debug(
-    char titulo[] /* entrada */,
-    double matriz_local[] /* entrada */,
-    int n /* entrada */,
-    int n_local /* entrada */,
-    int rank /* entrada */,
-    MPI_Comm comm /* entrada */)
-{
-    double *matriz = NULL;
-    int i, j, teste_local = 1;
-
-    if (rank == 0)
-    {
-        matriz = malloc(n * n * sizeof(double));
-        if (matriz == NULL)
-            teste_local = 0;
-        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
-        MPI_Gather(matriz_local, n_local * n, MPI_DOUBLE,
-                   matriz, n_local * n, MPI_DOUBLE, 0, comm);
-        printf("\nThe matrix %s\n", titulo);
-        for (i = 0; i < n; i++)
-        {
-            for (j = 0; j < n; j++)
-                printf("%0.2lf ", matriz[i * n + j]);
-            printf("\n");
-        }
-        printf("\n");
-        free(matriz);
-    }
-    else
-    {
-        verificar_erro(teste_local, "imprimir_matriz_resultante", "Não foi possivel alocar a matriz localmente", comm);
-        MPI_Gather(matriz_local, n_local * n, MPI_DOUBLE,
-                   matriz, n_local * n, MPI_DOUBLE, 0, comm);
-    }
 }
 
 void inicia_matrizes(

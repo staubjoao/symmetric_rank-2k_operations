@@ -23,7 +23,10 @@ static struct argp_option options[] = {
     {"help", 'h', 0, 0, "Print this help message"},
     {0}};
 
-static error_t parse_opt(int key, char *arg, struct argp_state *state)
+static error_t parse_opt(
+    int key,   /* entrada */
+    char *arg, /* entrada */
+    struct argp_state *state /* saida */)
 {
     struct arguments *arguments = state->input;
 
@@ -49,6 +52,13 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
 
 static struct argp argp = {options, parse_opt, NULL, NULL};
 
+void alocar_matrizes(int ni, int nj);
+void liberar_matrizes(int ni);
+double time_diff(struct timeval *start, struct timeval *end);
+void inicia_matrizes(int ni, int nj);
+void imprimir_matriz_resultante(int ni);
+void *kernel_syr2k_paralelo(void *arg);
+
 int tamanho_matriz, ni, nj;
 int tamanho_matriz, n_threads, passo, resto;
 
@@ -58,92 +68,6 @@ double alpha = 32412;
 double beta = 2123;
 
 double **A, **B, **C;
-
-void alocarMatrizes(int ni, int nj)
-{
-    A = (double **)malloc(ni * sizeof(double *));
-    for (int i = 0; i < nj; i++)
-        A[i] = (double *)malloc(ni * sizeof(double));
-
-    B = (double **)malloc(ni * sizeof(double *));
-    for (int i = 0; i < nj; i++)
-        B[i] = (double *)malloc(ni * sizeof(double));
-
-    C = (double **)malloc(ni * sizeof(double *));
-    for (int i = 0; i < ni; i++)
-        C[i] = (double *)malloc(ni * sizeof(double));
-}
-
-void liberarMatrizes(int ni)
-{
-    for (int i = 0; i < ni; i++)
-    {
-        free(A[i]);
-        free(B[i]);
-        free(C[i]);
-    }
-
-    free(A);
-    free(B);
-    free(C);
-}
-
-double time_diff(struct timeval *start, struct timeval *end)
-{
-    return (end->tv_sec - start->tv_sec) + 1e-6 * (end->tv_usec - start->tv_usec);
-}
-
-void init_array(int ni, int nj)
-{
-    int i, j;
-
-    for (i = 0; i < ni; i++)
-        for (j = 0; j < nj; j++)
-        {
-            A[i][j] = ((double)i * j) / ni;
-            B[i][j] = ((double)i * j) / ni;
-        }
-    for (i = 0; i < ni; i++)
-        for (j = 0; j < ni; j++)
-            C[i][j] = ((double)i * j) / ni;
-}
-
-void print_array(int ni)
-{
-    int i, j;
-
-    for (i = 0; i < ni; i++)
-        for (j = 0; j < ni; j++)
-        {
-            fprintf(stderr, "%0.2lf ", C[i][j]);
-            if ((i * ni + j) % 20 == 0)
-                fprintf(stderr, "\n");
-        }
-    fprintf(stderr, "\n");
-}
-
-void *kernel_syr2k_paralelo(void *arg)
-{
-    int id_thread = *((int *)arg);
-    int inicio = id_thread * passo;
-    int passolocal = passo;
-    int i, j, k;
-
-    if (id_thread == n_threads - 1)
-        passolocal += resto;
-
-    for (i = inicio; i < inicio + passolocal; i++)
-        for (j = 0; j < ni; j++)
-            C[i][j] *= beta;
-    pthread_barrier_wait(&barreira);
-    for (i = inicio; i < inicio + passolocal; i++)
-        for (j = 0; j < ni; j++)
-            for (k = 0; k < nj; k++)
-            {
-                C[i][j] += alpha * A[i][k] * B[j][k];
-                C[i][j] += alpha * B[i][k] * A[j][k];
-            }
-}
 
 int main(int argc, char **argv)
 {
@@ -177,12 +101,12 @@ int main(int argc, char **argv)
     ni = tamanho_matriz;
     nj = tamanho_matriz;
 
-    alocarMatrizes(ni, nj);
+    alocar_matrizes(ni, nj);
 
     double alpha;
     double beta;
 
-    init_array(ni, nj);
+    inicia_matrizes(ni, nj);
 
     struct timeval tstart, tend;
 
@@ -207,9 +131,104 @@ int main(int argc, char **argv)
     printf("Tempo paralelo: %lf sec\n", time_diff(&tstart, &tend));
 
     if (arguments.debug)
-        print_array(ni);
+        imprimir_matriz_resultante(ni);
 
-    liberarMatrizes(ni);
+    liberar_matrizes(ni);
 
     return 0;
+}
+
+void alocar_matrizes(
+    int ni /* entrada */,
+    int nj /* entrada */)
+{
+    A = (double **)malloc(ni * sizeof(double *));
+    for (int i = 0; i < nj; i++)
+        A[i] = (double *)malloc(ni * sizeof(double));
+
+    B = (double **)malloc(ni * sizeof(double *));
+    for (int i = 0; i < nj; i++)
+        B[i] = (double *)malloc(ni * sizeof(double));
+
+    C = (double **)malloc(ni * sizeof(double *));
+    for (int i = 0; i < ni; i++)
+        C[i] = (double *)malloc(ni * sizeof(double));
+}
+
+void liberar_matrizes(
+    int ni /* entrada */)
+{
+    for (int i = 0; i < ni; i++)
+    {
+        free(A[i]);
+        free(B[i]);
+        free(C[i]);
+    }
+
+    free(A);
+    free(B);
+    free(C);
+}
+
+double time_diff(
+    struct timeval *start /* entrada */,
+    struct timeval *end /* entrada */)
+{
+    return (end->tv_sec - start->tv_sec) + 1e-6 * (end->tv_usec - start->tv_usec);
+}
+
+void inicia_matrizes(
+    int ni /* entrada */,
+    int nj /* entrada */)
+{
+    int i, j;
+
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < nj; j++)
+        {
+            A[i][j] = ((double)i * j) / ni;
+            B[i][j] = ((double)i * j) / ni;
+        }
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < ni; j++)
+            C[i][j] = ((double)i * j) / ni;
+}
+
+void imprimir_matriz_resultante(
+    int ni /* entrada */)
+{
+    int i, j;
+
+    for (i = 0; i < ni; i++)
+        for (j = 0; j < ni; j++)
+        {
+            fprintf(stderr, "%0.2lf ", C[i][j]);
+            if ((i * ni + j) % 20 == 0)
+                fprintf(stderr, "\n");
+        }
+    fprintf(stderr, "\n");
+}
+
+void *kernel_syr2k_paralelo(
+    void *arg /* entrada */)
+{
+    int id_thread = *((int *)arg);
+    int inicio = id_thread * passo;
+    int passolocal = passo;
+    int i, j, k;
+
+    if (id_thread == n_threads - 1)
+        passolocal += resto;
+
+    for (i = inicio; i < inicio + passolocal; i++)
+        for (j = 0; j < ni; j++)
+            C[i][j] *= beta;
+    pthread_barrier_wait(&barreira);
+    for (i = inicio; i < inicio + passolocal; i++)
+        for (j = 0; j < ni; j++)
+            for (k = 0; k < nj; k++)
+            {
+                C[i][j] += alpha * A[i][k] * B[j][k];
+                C[i][j] += alpha * B[i][k] * A[j][k];
+            }
 }
