@@ -55,7 +55,7 @@ Isso executara os testes além de comparar as saidas e apresentar o tempo do pro
 
 A estrutura do projeto está organizada da seguinte forma:
 
-src: Contém os arquivos-fonte do projeto.
-test: Contém os scripts e arquivos de teste.
-makefile: Arquivo de compilação.
-README.md: Este arquivo README.
+* src: Contém os arquivos-fonte do projeto.
+* test: Contém os scripts e arquivos de teste.
+* makefile: Arquivo de compilação.
+* README.md: Este arquivo README.
